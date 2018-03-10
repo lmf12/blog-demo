@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="wTF-PE-cZC"/>
+                        <viewControllerLayoutGuide type="bottom" id="m6r-tp-mxz"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Auv-nA-mOt">
+                                <rect key="frame" x="65" y="607" width="244" height="40"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="udg-OY-MT5">
+                                        <rect key="frame" x="0.0" y="5" width="46" height="30"/>
+                                        <state key="normal" title="上一首"/>
+                                        <connections>
+                                            <action selector="onBtnPreviousClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="osC-mM-OkB"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0vj-L4-cqm">
+                                        <rect key="frame" x="198" y="5" width="46" height="30"/>
+                                        <state key="normal" title="下一首"/>
+                                        <connections>
+                                            <action selector="onBtnNextClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="14R-Lf-t79"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xnP-xR-GtC">
+                                        <rect key="frame" x="137" y="5" width="31" height="30"/>
+                                        <state key="normal" title="暂停"/>
+                                        <connections>
+                                            <action selector="onBtnPauseClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="a7D-Az-sWO"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AZS-k4-Ipp">
+                                        <rect key="frame" x="76" y="5" width="31" height="30"/>
+                                        <state key="normal" title="播放"/>
+                                        <connections>
+                                            <action selector="onBtnPlayClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="KJB-RW-RSC"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="udg-OY-MT5" firstAttribute="leading" secondItem="Auv-nA-mOt" secondAttribute="leading" id="5Ys-oe-DFr"/>
+                                    <constraint firstItem="xnP-xR-GtC" firstAttribute="leading" secondItem="AZS-k4-Ipp" secondAttribute="trailing" constant="30" id="A1B-aU-LlB"/>
+                                    <constraint firstItem="xnP-xR-GtC" firstAttribute="centerY" secondItem="Auv-nA-mOt" secondAttribute="centerY" id="E51-A0-MTm"/>
+                                    <constraint firstAttribute="trailing" secondItem="0vj-L4-cqm" secondAttribute="trailing" id="TZ9-iy-5GB"/>
+                                    <constraint firstItem="udg-OY-MT5" firstAttribute="centerY" secondItem="Auv-nA-mOt" secondAttribute="centerY" id="V8x-7n-nWm"/>
+                                    <constraint firstItem="AZS-k4-Ipp" firstAttribute="leading" secondItem="udg-OY-MT5" secondAttribute="trailing" constant="30" id="WKb-GM-8qw"/>
+                                    <constraint firstItem="0vj-L4-cqm" firstAttribute="leading" secondItem="xnP-xR-GtC" secondAttribute="trailing" constant="30" id="cGu-Px-f9K"/>
+                                    <constraint firstItem="AZS-k4-Ipp" firstAttribute="centerY" secondItem="Auv-nA-mOt" secondAttribute="centerY" id="kUW-1m-A1O"/>
+                                    <constraint firstAttribute="height" constant="40" id="qCn-Ld-E0u"/>
+                                    <constraint firstItem="0vj-L4-cqm" firstAttribute="centerY" secondItem="Auv-nA-mOt" secondAttribute="centerY" id="s5B-Qg-KcZ"/>
+                                </constraints>
+                            </view>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="XIR-D2-6Yf">
+                                <rect key="frame" x="13" y="557" width="349" height="31"/>
+                            </slider>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="m6r-tp-mxz" firstAttribute="top" secondItem="Auv-nA-mOt" secondAttribute="bottom" constant="20" id="MoV-y3-ybR"/>
+                            <constraint firstItem="Auv-nA-mOt" firstAttribute="top" secondItem="XIR-D2-6Yf" secondAttribute="bottom" constant="20" id="Pzp-KD-gMI"/>
+                            <constraint firstAttribute="trailing" secondItem="XIR-D2-6Yf" secondAttribute="trailing" constant="15" id="a1Q-SC-Hud"/>
+                            <constraint firstItem="Auv-nA-mOt" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="aTP-vH-c6D"/>
+                            <constraint firstItem="XIR-D2-6Yf" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="15" id="k2G-u0-nxc"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="viewVideoProgress" destination="XIR-D2-6Yf" id="pO8-7l-4ET"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+    </scenes>
+</document>
