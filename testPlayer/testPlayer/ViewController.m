@@ -96,9 +96,8 @@
 // 初始化URL列表
 - (void)initData {
     
-    NSArray *videoUrlList = @[@"http://bevavideo-ios.beva.cn/bf72bb54e9/h360/video.mp4",
-                              @"http://bevavideo-ios.beva.cn/33af2f1fbc/h360/video.mp4",
-                              @"https://zzya.beva.cn/dq/li58fi1qnOW__BDr5Z2bqpyjLGhT.mp3"];
+    NSArray *videoUrlList = @[@"http://p4pks8hkh.bkt.clouddn.com/sample-video1.mp4",
+                              @"http://p4pks8hkh.bkt.clouddn.com/sample-video2.mp4"];
     self.urlList = [[NSMutableArray alloc] init];
     
     for (NSString *urlString in videoUrlList) {
