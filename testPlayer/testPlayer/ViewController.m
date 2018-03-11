@@ -88,7 +88,7 @@
                  object:nil];
     [center addObserver:self
                selector:@selector(resetPlayerToPlayerLayer)
-                   name:UIApplicationDidBecomeActiveNotification
+                   name:UIApplicationWillEnterForegroundNotification
                  object:nil];
 
 }
