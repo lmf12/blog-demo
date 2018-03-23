@@ -16,6 +16,7 @@
 		E86677362063EEBC002586CC /* OGTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E86677342063EEBC002586CC /* OGTableViewCell.m */; };
 		E86677372063EEBC002586CC /* OGTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E86677352063EEBC002586CC /* OGTableViewCell.xib */; };
 		E866773B2063F439002586CC /* OGViewController0.m in Sources */ = {isa = PBXBuildFile; fileRef = E866773A2063F439002586CC /* OGViewController0.m */; };
+		E866773E20640079002586CC /* OGGLView0.m in Sources */ = {isa = PBXBuildFile; fileRef = E866773D20640079002586CC /* OGGLView0.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,8 @@
 		E86677352063EEBC002586CC /* OGTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OGTableViewCell.xib; sourceTree = "<group>"; };
 		E86677392063F439002586CC /* OGViewController0.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OGViewController0.h; sourceTree = "<group>"; };
 		E866773A2063F439002586CC /* OGViewController0.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OGViewController0.m; sourceTree = "<group>"; };
+		E866773C20640079002586CC /* OGGLView0.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OGGLView0.h; sourceTree = "<group>"; };
+		E866773D20640079002586CC /* OGGLView0.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OGGLView0.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +91,8 @@
 			children = (
 				E86677392063F439002586CC /* OGViewController0.h */,
 				E866773A2063F439002586CC /* OGViewController0.m */,
+				E866773C20640079002586CC /* OGGLView0.h */,
+				E866773D20640079002586CC /* OGGLView0.m */,
 			);
 			path = "example 0";
 			sourceTree = "<group>";
@@ -166,6 +171,7 @@
 			files = (
 				E84744592063C61A00B85F17 /* ViewController.m in Sources */,
 				E86677362063EEBC002586CC /* OGTableViewCell.m in Sources */,
+				E866773E20640079002586CC /* OGGLView0.m in Sources */,
 				E866773B2063F439002586CC /* OGViewController0.m in Sources */,
 				E84744642063C61A00B85F17 /* main.m in Sources */,
 				E84744562063C61A00B85F17 /* AppDelegate.m in Sources */,
