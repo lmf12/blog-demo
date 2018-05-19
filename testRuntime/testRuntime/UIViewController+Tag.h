@@ -10,10 +10,6 @@
 
 @interface UIViewController (Tag)
 
-// 这里添加属性的 getter 和 setter 方法
-
-- (void)setTag:(NSString *)tag;
-
-- (NSString *)tag;
+@property (nonatomic, strong) NSString *tag;
 
 @end

@@ -13,4 +13,10 @@
 // 通过字典来初始化模型
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 
+// 解档所有属性
+- (void)initAllPropertiesWithCoder:(NSCoder *)coder;
+
+// 归档所有属性
+- (void)encodeAllPropertiesWithCoder:(NSCoder *)coder;
+
 @end

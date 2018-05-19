@@ -6,7 +6,7 @@
 //  Copyright © 2018年 Lyman Li. All rights reserved.
 //
 
-#import "NSObject+JSONExtension.m"
+#import "NSObject+JSONExtension.h"
 
 #import "ObjectA.h"
 
