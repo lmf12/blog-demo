@@ -96,8 +96,8 @@
 // 初始化URL列表
 - (void)initData {
     
-    NSArray *videoUrlList = @[@"http://p4pks8hkh.bkt.clouddn.com/sample-video1.mp4",
-                              @"http://p4pks8hkh.bkt.clouddn.com/sample-video2.mp4"];
+    NSArray *videoUrlList = @[@"https://lymanli-1258009115.cos.ap-guangzhou.myqcloud.com/video/sample/sample-video1.mp4",
+                              @"https://lymanli-1258009115.cos.ap-guangzhou.myqcloud.com/video/sample/sample-video2.mp4"];
     self.urlList = [[NSMutableArray alloc] init];
     
     for (NSString *urlString in videoUrlList) {
