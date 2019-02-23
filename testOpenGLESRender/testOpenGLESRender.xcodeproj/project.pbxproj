@@ -16,6 +16,8 @@
 		E831FBD3221E845D004B60A0 /* GLKitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E831FBD2221E845D004B60A0 /* GLKitViewController.m */; };
 		E831FBD6221E855D004B60A0 /* GLSLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E831FBD5221E855D004B60A0 /* GLSLViewController.m */; };
 		E831FBD8221E9643004B60A0 /* sample.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E831FBD7221E9643004B60A0 /* sample.jpg */; };
+		E831FC0F2220F9F0004B60A0 /* glsl.vsh in Resources */ = {isa = PBXBuildFile; fileRef = E831FC0D2220F9F0004B60A0 /* glsl.vsh */; };
+		E831FC102220F9F0004B60A0 /* glsl.fsh in Resources */ = {isa = PBXBuildFile; fileRef = E831FC0E2220F9F0004B60A0 /* glsl.fsh */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,8 @@
 		E831FBD4221E855D004B60A0 /* GLSLViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GLSLViewController.h; sourceTree = "<group>"; };
 		E831FBD5221E855D004B60A0 /* GLSLViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GLSLViewController.m; sourceTree = "<group>"; };
 		E831FBD7221E9643004B60A0 /* sample.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sample.jpg; sourceTree = "<group>"; };
+		E831FC0D2220F9F0004B60A0 /* glsl.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = glsl.vsh; sourceTree = "<group>"; };
+		E831FC0E2220F9F0004B60A0 /* glsl.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = glsl.fsh; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +70,8 @@
 		E831FBBA221E55A8004B60A0 /* testOpenGLESRender */ = {
 			isa = PBXGroup;
 			children = (
+				E831FC0E2220F9F0004B60A0 /* glsl.fsh */,
+				E831FC0D2220F9F0004B60A0 /* glsl.vsh */,
 				E831FBD7221E9643004B60A0 /* sample.jpg */,
 				E831FBBB221E55A8004B60A0 /* AppDelegate.h */,
 				E831FBBC221E55A8004B60A0 /* AppDelegate.m */,
@@ -142,6 +148,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				E831FBC8221E55AA004B60A0 /* LaunchScreen.storyboard in Resources */,
+				E831FC102220F9F0004B60A0 /* glsl.fsh in Resources */,
+				E831FC0F2220F9F0004B60A0 /* glsl.vsh in Resources */,
 				E831FBC5221E55AA004B60A0 /* Assets.xcassets in Resources */,
 				E831FBC3221E55A8004B60A0 /* Main.storyboard in Resources */,
 				E831FBD8221E9643004B60A0 /* sample.jpg in Resources */,
