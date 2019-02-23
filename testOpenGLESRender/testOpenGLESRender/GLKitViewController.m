@@ -36,8 +36,6 @@ typedef struct {
     if (_vertices) {
         free(_vertices);
     }
-    
-    // TODO: 删除顶点缓存
 }
 
 - (void)viewDidLoad {
@@ -72,7 +70,9 @@ typedef struct {
     [EAGLContext setCurrentContext:self.glkView.context];
     
     // 通过 GLKTextureLoader 来加载纹理，并存放在 GLKBaseEffect 中
-    UIImage *image = [UIImage imageNamed:@"sample.jpg"];
+    NSString *imagePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"sample.jpg"];
+    UIImage *image = [UIImage imageWithContentsOfFile:imagePath]; // 这里如果用 imageNamed 来读取图片，在反复加载纹理的时候，会出现倒置的错误
+
     NSDictionary *options = @{GLKTextureLoaderOriginBottomLeft : @(YES)}; // 消除 UIKit 和 GLKit 的坐标差异，否则会上下颠倒
     GLKTextureInfo *textureInfo = [GLKTextureLoader textureWithCGImage:[image CGImage]
                                                                options:options
