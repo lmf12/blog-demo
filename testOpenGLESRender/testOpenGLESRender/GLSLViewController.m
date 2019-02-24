@@ -31,8 +31,10 @@ typedef struct {
     if ([EAGLContext currentContext] == self.context) {
         [EAGLContext setCurrentContext:nil];
     }
+    // C语言风格的数组，需要手动释放
     if (_vertices) {
         free(_vertices);
+        _vertices = nil;
     }
 }
 
@@ -68,7 +70,7 @@ typedef struct {
     // 读取纹理
     NSString *imagePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"sample.jpg"];
     UIImage *image = [UIImage imageWithContentsOfFile:imagePath];
-    GLuint texture = [self createTextureWithImage:image];
+    GLuint textureID = [self createTextureWithImage:image];
     
     // 设置视口尺寸
     glViewport(0, 0, self.drawableWidth, self.drawableHeight);
@@ -77,14 +79,15 @@ typedef struct {
     GLuint program = [self programWithShaderName:@"glsl"]; // glsl.vsh & glsl.fsh
     glUseProgram(program);
     
+    // 获取 shader 中的参数，然后传数据进去
     GLuint positionSlot = glGetAttribLocation(program, "Position");
     GLuint textureSlot = glGetUniformLocation(program, "Texture");  // 注意 Uniform 类型的获取方式
     GLuint textureCoordsSlot = glGetAttribLocation(program, "TextureCoords");
     
     // 将纹理 ID 传给着色器程序
     glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, texture);
-    glUniform1i(textureSlot, 0);  // 将 textureSlot 指定为 0
+    glBindTexture(GL_TEXTURE_2D, textureID);
+    glUniform1i(textureSlot, 0);  // 将 textureSlot 赋值为 0，而 0 与 GL_TEXTURE0 对应，这里如果写 1，上面也要改成 GL_TEXTURE1
     
     // 创建顶点缓存
     GLuint vertexBuffer;
@@ -93,16 +96,18 @@ typedef struct {
     GLsizeiptr bufferSizeBytes = sizeof(SenceVertex) * 4;
     glBufferData(GL_ARRAY_BUFFER, bufferSizeBytes, self.vertices, GL_STATIC_DRAW);
     
-    // 顶点
+    // 设置顶点数据
     glEnableVertexAttribArray(positionSlot);
     glVertexAttribPointer(positionSlot, 3, GL_FLOAT, GL_FALSE, sizeof(SenceVertex), NULL + offsetof(SenceVertex, positionCoord));
     
-    // 纹理
+    // 设置纹理数据
     glEnableVertexAttribArray(textureCoordsSlot);
     glVertexAttribPointer(textureCoordsSlot, 2, GL_FLOAT, GL_FALSE, sizeof(SenceVertex), NULL + offsetof(SenceVertex, textureCoord));
     
+    // 开始绘制
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
     
+    // 将绑定的渲染缓存呈现到屏幕上
     [self.context presentRenderbuffer:GL_RENDERBUFFER];
     
     // 删除顶点缓存

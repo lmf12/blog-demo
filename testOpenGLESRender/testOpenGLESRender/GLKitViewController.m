@@ -33,8 +33,10 @@ typedef struct {
     if ([EAGLContext currentContext] == self.glkView.context) {
         [EAGLContext setCurrentContext:nil];
     }
+    // C语言风格的数组，需要手动释放
     if (_vertices) {
         free(_vertices);
+        _vertices = nil;
     }
 }
 
@@ -43,6 +45,7 @@ typedef struct {
     
     self.view.backgroundColor = [UIColor whiteColor];
     [self commonInit];
+    // display 会触发 glkView:drawInRect: 方法，并在触发这个方法后，内部还会调用 presentRenderbuffer 来将绑定的渲染缓存呈现到屏幕上
     [self.glkView display];
 }
 
@@ -89,23 +92,24 @@ typedef struct {
     
     // 创建顶点缓存
     GLuint vertexBuffer;
-    glGenBuffers(1, &vertexBuffer);
-    glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
+    glGenBuffers(1, &vertexBuffer);  // 步骤一：生成
+    glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);  // 步骤二：绑定
     GLsizeiptr bufferSizeBytes = sizeof(SenceVertex) * 4;
-    glBufferData(GL_ARRAY_BUFFER, bufferSizeBytes, self.vertices, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, bufferSizeBytes, self.vertices, GL_STATIC_DRAW);  // 步骤三：缓存数据
     
-    // 顶点
-    glEnableVertexAttribArray(GLKVertexAttribPosition);
-    glVertexAttribPointer(GLKVertexAttribPosition, 3, GL_FLOAT, GL_FALSE, sizeof(SenceVertex), NULL + offsetof(SenceVertex, positionCoord));
+    // 设置顶点数据
+    glEnableVertexAttribArray(GLKVertexAttribPosition);  // 步骤四：启用或禁用
+    glVertexAttribPointer(GLKVertexAttribPosition, 3, GL_FLOAT, GL_FALSE, sizeof(SenceVertex), NULL + offsetof(SenceVertex, positionCoord));  // 步骤五：设置指针
     
-    // 纹理
-    glEnableVertexAttribArray(GLKVertexAttribTexCoord0);
-    glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, sizeof(SenceVertex), NULL + offsetof(SenceVertex, textureCoord));
+    // 设置纹理数据
+    glEnableVertexAttribArray(GLKVertexAttribTexCoord0);  // 步骤四：启用或禁用
+    glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, sizeof(SenceVertex), NULL + offsetof(SenceVertex, textureCoord));  // 步骤五：设置指针
     
-    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+    // 开始绘制
+    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);  // 步骤六：绘图
     
     // 删除顶点缓存
-    glDeleteBuffers(1, &vertexBuffer);
+    glDeleteBuffers(1, &vertexBuffer);  // 步骤七：删除
     vertexBuffer = 0;
 }
 
