@@ -16,6 +16,9 @@
 		E81A4BE3223E17390065DB74 /* PlaneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E81A4BE2223E17390065DB74 /* PlaneViewController.m */; };
 		E81A4BE5223E18320065DB74 /* sample.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E81A4BE4223E18320065DB74 /* sample.jpg */; };
 		E81A4BE8223E2A1A0065DB74 /* CubeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E81A4BE7223E2A1A0065DB74 /* CubeViewController.m */; };
+		E81A4BEB223E47500065DB74 /* ObjectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E81A4BEA223E47500065DB74 /* ObjectViewController.m */; };
+		E81A4BED223E49A30065DB74 /* model in Resources */ = {isa = PBXBuildFile; fileRef = E81A4BEC223E49A20065DB74 /* model */; };
+		E81A4C4D223E55390065DB74 /* WavefrontOBJTool.m in Sources */ = {isa = PBXBuildFile; fileRef = E81A4C4C223E55390065DB74 /* WavefrontOBJTool.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +37,11 @@
 		E81A4BE4223E18320065DB74 /* sample.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sample.jpg; sourceTree = "<group>"; };
 		E81A4BE6223E2A1A0065DB74 /* CubeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CubeViewController.h; sourceTree = "<group>"; };
 		E81A4BE7223E2A1A0065DB74 /* CubeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CubeViewController.m; sourceTree = "<group>"; };
+		E81A4BE9223E47500065DB74 /* ObjectViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjectViewController.h; sourceTree = "<group>"; };
+		E81A4BEA223E47500065DB74 /* ObjectViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjectViewController.m; sourceTree = "<group>"; };
+		E81A4BEC223E49A20065DB74 /* model */ = {isa = PBXFileReference; lastKnownFileType = folder; path = model; sourceTree = "<group>"; };
+		E81A4C4B223E55390065DB74 /* WavefrontOBJTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WavefrontOBJTool.h; sourceTree = "<group>"; };
+		E81A4C4C223E55390065DB74 /* WavefrontOBJTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WavefrontOBJTool.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +74,8 @@
 		E81A4BCA223E14FF0065DB74 /* testOpenGLESLoadOBJ */ = {
 			isa = PBXGroup;
 			children = (
+				E81A4C4A223E55250065DB74 /* tool */,
+				E81A4BEC223E49A20065DB74 /* model */,
 				E81A4BE4223E18320065DB74 /* sample.jpg */,
 				E81A4BCB223E14FF0065DB74 /* AppDelegate.h */,
 				E81A4BCC223E14FF0065DB74 /* AppDelegate.m */,
@@ -75,6 +85,8 @@
 				E81A4BE2223E17390065DB74 /* PlaneViewController.m */,
 				E81A4BE6223E2A1A0065DB74 /* CubeViewController.h */,
 				E81A4BE7223E2A1A0065DB74 /* CubeViewController.m */,
+				E81A4BE9223E47500065DB74 /* ObjectViewController.h */,
+				E81A4BEA223E47500065DB74 /* ObjectViewController.m */,
 				E81A4BD1223E14FF0065DB74 /* Main.storyboard */,
 				E81A4BD4223E14FF0065DB74 /* Assets.xcassets */,
 				E81A4BD6223E14FF0065DB74 /* LaunchScreen.storyboard */,
@@ -82,6 +94,15 @@
 				E81A4BDA223E14FF0065DB74 /* main.m */,
 			);
 			path = testOpenGLESLoadOBJ;
+			sourceTree = "<group>";
+		};
+		E81A4C4A223E55250065DB74 /* tool */ = {
+			isa = PBXGroup;
+			children = (
+				E81A4C4B223E55390065DB74 /* WavefrontOBJTool.h */,
+				E81A4C4C223E55390065DB74 /* WavefrontOBJTool.m */,
+			);
+			path = tool;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -143,6 +164,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E81A4BD8223E14FF0065DB74 /* LaunchScreen.storyboard in Resources */,
+				E81A4BED223E49A30065DB74 /* model in Resources */,
 				E81A4BD5223E14FF0065DB74 /* Assets.xcassets in Resources */,
 				E81A4BD3223E14FF0065DB74 /* Main.storyboard in Resources */,
 				E81A4BE5223E18320065DB74 /* sample.jpg in Resources */,
@@ -158,7 +180,9 @@
 			files = (
 				E81A4BD0223E14FF0065DB74 /* ViewController.m in Sources */,
 				E81A4BDB223E14FF0065DB74 /* main.m in Sources */,
+				E81A4C4D223E55390065DB74 /* WavefrontOBJTool.m in Sources */,
 				E81A4BE8223E2A1A0065DB74 /* CubeViewController.m in Sources */,
+				E81A4BEB223E47500065DB74 /* ObjectViewController.m in Sources */,
 				E81A4BCD223E14FF0065DB74 /* AppDelegate.m in Sources */,
 				E81A4BE3223E17390065DB74 /* PlaneViewController.m in Sources */,
 			);

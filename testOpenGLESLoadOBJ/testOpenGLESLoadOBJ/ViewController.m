@@ -8,6 +8,7 @@
 
 #import "PlaneViewController.h"
 #import "CubeViewController.h"
+#import "ObjectViewController.h"
 
 #import "ViewController.h"
 
@@ -39,6 +40,8 @@
 }
 
 - (IBAction)actionObject:(id)sender {
+    ObjectViewController *vc = [[ObjectViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end
