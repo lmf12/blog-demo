@@ -31,6 +31,7 @@ typedef struct {
 @property (nonatomic, assign) NSInteger angle;  // 当前旋转的角度
 
 @end
+
 @implementation PlaneViewController
 
 - (void)dealloc {
@@ -95,9 +96,9 @@ typedef struct {
     
     // 使用灯光
     self.baseEffect.light0.enabled = YES;
-    self.baseEffect.light0.diffuseColor = GLKVector4Make(1, 0, 0, 1); // 漫反射光
-//    self.baseEffect.light0.ambientColor = GLKVector4Make(1, 0, 0, 1); // 环境光
-//    self.baseEffect.light0.specularColor = GLKVector4Make(1, 0, 0, 1); // 镜面光
+    self.baseEffect.light0.diffuseColor = GLKVector4Make(1, 1, 1, 1); // 漫反射光
+//    self.baseEffect.light0.ambientColor = GLKVector4Make(1, 1, 1, 1); // 环境光
+//    self.baseEffect.light0.specularColor = GLKVector4Make(1, 1, 1, 1); // 镜面光
     self.baseEffect.light0.position = GLKVector4Make(-0.5, -0.5, 1, 1);
 }
 

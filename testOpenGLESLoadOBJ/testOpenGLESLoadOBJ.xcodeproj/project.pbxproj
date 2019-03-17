@@ -15,6 +15,7 @@
 		E81A4BDB223E14FF0065DB74 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E81A4BDA223E14FF0065DB74 /* main.m */; };
 		E81A4BE3223E17390065DB74 /* PlaneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E81A4BE2223E17390065DB74 /* PlaneViewController.m */; };
 		E81A4BE5223E18320065DB74 /* sample.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E81A4BE4223E18320065DB74 /* sample.jpg */; };
+		E81A4BE8223E2A1A0065DB74 /* CubeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E81A4BE7223E2A1A0065DB74 /* CubeViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,8 @@
 		E81A4BE1223E17390065DB74 /* PlaneViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlaneViewController.h; sourceTree = "<group>"; };
 		E81A4BE2223E17390065DB74 /* PlaneViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlaneViewController.m; sourceTree = "<group>"; };
 		E81A4BE4223E18320065DB74 /* sample.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sample.jpg; sourceTree = "<group>"; };
+		E81A4BE6223E2A1A0065DB74 /* CubeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CubeViewController.h; sourceTree = "<group>"; };
+		E81A4BE7223E2A1A0065DB74 /* CubeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CubeViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +73,8 @@
 				E81A4BCF223E14FF0065DB74 /* ViewController.m */,
 				E81A4BE1223E17390065DB74 /* PlaneViewController.h */,
 				E81A4BE2223E17390065DB74 /* PlaneViewController.m */,
+				E81A4BE6223E2A1A0065DB74 /* CubeViewController.h */,
+				E81A4BE7223E2A1A0065DB74 /* CubeViewController.m */,
 				E81A4BD1223E14FF0065DB74 /* Main.storyboard */,
 				E81A4BD4223E14FF0065DB74 /* Assets.xcassets */,
 				E81A4BD6223E14FF0065DB74 /* LaunchScreen.storyboard */,
@@ -153,6 +158,7 @@
 			files = (
 				E81A4BD0223E14FF0065DB74 /* ViewController.m in Sources */,
 				E81A4BDB223E14FF0065DB74 /* main.m in Sources */,
+				E81A4BE8223E2A1A0065DB74 /* CubeViewController.m in Sources */,
 				E81A4BCD223E14FF0065DB74 /* AppDelegate.m in Sources */,
 				E81A4BE3223E17390065DB74 /* PlaneViewController.m in Sources */,
 			);

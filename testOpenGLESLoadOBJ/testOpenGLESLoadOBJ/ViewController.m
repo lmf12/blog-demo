@@ -7,6 +7,7 @@
 //
 
 #import "PlaneViewController.h"
+#import "CubeViewController.h"
 
 #import "ViewController.h"
 
@@ -28,11 +29,13 @@
 }
 
 - (IBAction)actionPlane:(id)sender {
-    UIViewController *vc = [[PlaneViewController alloc] init];
+    PlaneViewController *vc = [[PlaneViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (IBAction)actionCube:(id)sender {
+    CubeViewController *vc = [[CubeViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (IBAction)actionObject:(id)sender {
