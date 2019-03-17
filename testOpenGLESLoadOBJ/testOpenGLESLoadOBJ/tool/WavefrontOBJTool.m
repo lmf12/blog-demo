@@ -158,8 +158,6 @@
         int positionIndex = 0;
         [self.positionIndexData getBytes:&positionIndex range:NSMakeRange(i * sizeof(uint32_t), sizeof(uint32_t))];
         
-        positionIndex -= 1;
-        
         float positionX = 0;
         float positionY = 0;
         float positionZ = 0;
@@ -170,9 +168,7 @@
         // 法线数据
         int normalIndex = 0;
         [self.normalIndexData getBytes:&normalIndex range:NSMakeRange(i * sizeof(uint32_t), sizeof(uint32_t))];
-        
-        normalIndex -= 1;
-        
+
         float normalX = 0;
         float normalY = 0;
         float normalZ = 0;
@@ -183,8 +179,6 @@
         // 纹理坐标数据
 //        int uvIndex = 0;
 //        [self.uvIndexData getBytes:&uvIndex range:NSMakeRange(i * sizeof(uint32_t), sizeof(uint32_t))];
-//
-//        uvIndex -= 1;
 //
 //        float u = 0;
 //        float v = 0;
