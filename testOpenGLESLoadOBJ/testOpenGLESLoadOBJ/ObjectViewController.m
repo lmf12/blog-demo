@@ -18,6 +18,7 @@
 @property (nonatomic, strong) GLKBaseEffect *baseEffect;
 
 @property (nonatomic, assign) SenceVertex *vertices;
+@property (nonatomic, assign) NSInteger vertexCount;
 
 @property (nonatomic, strong) CADisplayLink *displayLink;
 @property (nonatomic, assign) NSInteger angle;
@@ -45,20 +46,41 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.angle = 0;
     self.view.backgroundColor = [UIColor whiteColor];
     [self commonInit];
     
-    self.angle = 0;
-
-    self.displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(update)];
-    [self.displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
+    // 显示loading
+    UIActivityIndicatorView *indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [indicatorView startAnimating];
+    indicatorView.center = self.view.center;
+    [self.view addSubview:indicatorView];
+    
+    // 加载模型数据
+    WavefrontOBJTool *tool = [[WavefrontOBJTool alloc] init];
+    NSString *path = [[[NSBundle mainBundle] resourcePath] stringByAppendingString:@"/model/IronMan.obj"];
+    __weak ObjectViewController *weakSelf = self;
+    [tool loadDataFromObj:path completion:^(SenceVertex *vertexs, NSInteger count) {
+        // 如果页面已经退出，释放数据
+        if (!weakSelf) {
+            free(vertexs);
+        }
+        
+        // 隐藏loading
+        [indicatorView removeFromSuperview];
+        
+        // 数值赋值
+        weakSelf.vertices = vertexs;
+        weakSelf.vertexCount = count;
+        
+        // 开始渲染和定时旋转
+        weakSelf.displayLink = [CADisplayLink displayLinkWithTarget:weakSelf selector:@selector(update)];
+        [weakSelf.displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
+    }];
 }
 
 - (void)commonInit {
     EAGLContext *context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
-    WavefrontOBJTool *tool = [[WavefrontOBJTool alloc] init];
-    NSString *path = [[[NSBundle mainBundle] resourcePath] stringByAppendingString:@"/model/IronMan.obj"];
-    self.vertices = [tool loadDataFromObj:path];
     
     CGRect frame = CGRectMake(0, 100, self.view.frame.size.width, self.view.frame.size.width);
     self.glkView = [[GLKView alloc] initWithFrame:frame context:context];
@@ -92,10 +114,6 @@
     self.baseEffect.transform.projectionMatrix = matrix;
 }
 
-- (int)vertexCount {
-    return 449481;
-}
-
 #pragma mark - GLKViewDelegate
 
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect {
@@ -108,7 +126,7 @@
     GLuint vertexBuffer;
     glGenBuffers(1, &vertexBuffer);
     glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
-    GLsizeiptr bufferSizeBytes = sizeof(SenceVertex) * [self vertexCount];
+    GLsizeiptr bufferSizeBytes = sizeof(SenceVertex) * self.vertexCount;
     glBufferData(GL_ARRAY_BUFFER, bufferSizeBytes, self.vertices, GL_STATIC_DRAW);
     
     glEnableVertexAttribArray(GLKVertexAttribPosition);
@@ -120,7 +138,7 @@
     glEnableVertexAttribArray(GLKVertexAttribNormal);
     glVertexAttribPointer(GLKVertexAttribNormal, 3, GL_FLOAT, GL_FALSE, sizeof(SenceVertex), NULL + offsetof(SenceVertex, normal));
     
-    glDrawArrays(GL_TRIANGLE_STRIP, 0, [self vertexCount]);
+    glDrawArrays(GL_TRIANGLES, 0, (int)self.vertexCount);
     
     glDeleteBuffers(1, &vertexBuffer);
     vertexBuffer = 0;

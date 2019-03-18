@@ -35,25 +35,31 @@
     return self;
 }
 
-- (SenceVertex *)loadDataFromObj:(NSString *)filePath {
-    NSString *fileContent = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
-    NSArray<NSString *> *lines = [fileContent componentsSeparatedByString:@"\n"];
-    for (NSString *line in lines) {
-        if (line.length >= 2) {
-            if ([line characterAtIndex:0] == 'v' && [line characterAtIndex:1] == ' ') {
-                [self processVertexLine:line];
-            } else if ([line characterAtIndex:0] == 'v' && [line characterAtIndex:1] == 'n') {
-                [self processNormalLine:line];
-            } else if ([line characterAtIndex:0] == 'v' && [line characterAtIndex:1] == 't') {
-                [self processUVLine:line];
-            } else if ([line characterAtIndex:0] == 'f' && [line characterAtIndex:1] == ' ') {
-                [self processFaceIndexLine:line];
+- (void)loadDataFromObj:(NSString *)filePath
+             completion:(void (^)(SenceVertex *, NSInteger))completion {
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSString *fileContent = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
+        NSArray<NSString *> *lines = [fileContent componentsSeparatedByString:@"\n"];
+        for (NSString *line in lines) {
+            if (line.length >= 2) {
+                if ([line characterAtIndex:0] == 'v' && [line characterAtIndex:1] == ' ') {
+                    [self processVertexLine:line];
+                } else if ([line characterAtIndex:0] == 'v' && [line characterAtIndex:1] == 'n') {
+                    [self processNormalLine:line];
+                } else if ([line characterAtIndex:0] == 'v' && [line characterAtIndex:1] == 't') {
+                    [self processUVLine:line];
+                } else if ([line characterAtIndex:0] == 'f' && [line characterAtIndex:1] == ' ') {
+                    [self processFaceIndexLine:line];
+                }
             }
         }
-    }
-    SenceVertex *vertexs = [self decompressToVertexArray];
-    
-    return vertexs;
+        NSInteger vertexCount = 0;
+        SenceVertex *vertexs = [self decompressToVertexArrayWithCount:&vertexCount];
+        if (completion) {
+            completion(vertexs, vertexCount);
+        }
+    });
 }
 
 - (void)processVertexLine:(NSString *)line {
@@ -149,8 +155,9 @@
     }
 }
 
-- (SenceVertex *)decompressToVertexArray {
+- (SenceVertex *)decompressToVertexArrayWithCount:(NSInteger *)count {
     NSInteger vertexCount = self.positionIndexData.length / sizeof(uint32_t);
+    *count = vertexCount;
     
     SenceVertex *vertex = malloc(sizeof(SenceVertex) * vertexCount);
     for (int i = 0; i < vertexCount; ++i) {

@@ -18,6 +18,7 @@ typedef struct {
 
 @interface WavefrontOBJTool : NSObject
 
-- (SenceVertex *)loadDataFromObj:(NSString *)filePath;
+- (void)loadDataFromObj:(NSString *)filePath
+             completion:(void (^)(SenceVertex *vertexs, NSInteger count))completion;
 
 @end
