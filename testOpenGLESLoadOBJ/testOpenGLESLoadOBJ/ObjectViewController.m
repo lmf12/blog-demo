@@ -67,7 +67,9 @@
         }
         
         // 隐藏loading
-        [indicatorView removeFromSuperview];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [indicatorView removeFromSuperview];
+        });
         
         // 数值赋值
         weakSelf.vertices = vertexs;
