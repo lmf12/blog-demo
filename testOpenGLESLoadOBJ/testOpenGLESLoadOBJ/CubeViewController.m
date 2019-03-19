@@ -70,52 +70,52 @@ static NSInteger const kCoordCount = 36; // 顶点数
     // 下面的数据用来绘制以（0，0，0）为中心，边长为 1 的立方体
     self.vertices = malloc(sizeof(SenceVertex) * kCoordCount);
     // 前面
-    self.vertices[0] = (SenceVertex){{-0.5, 0.5, 0.5}, {0, 1}, {0, 0, -1}};
-    self.vertices[1] = (SenceVertex){{-0.5, -0.5, 0.5}, {0, 0}, {0, 0, -1}};
-    self.vertices[2] = (SenceVertex){{0.5, 0.5, 0.5}, {1, 1}, {0, 0, -1}};
-    self.vertices[3] = (SenceVertex){{-0.5, -0.5, 0.5}, {0, 0}, {0, 0, -1}};
-    self.vertices[4] = (SenceVertex){{0.5, 0.5, 0.5}, {1, 1}, {0, 0, -1}};
-    self.vertices[5] = (SenceVertex){{0.5, -0.5, 0.5}, {1, 0}, {0, 0, -1}};
+    self.vertices[0] = (SenceVertex){{-0.5, 0.5, 0.5}, {0, 1}, {0, 0, 1}};
+    self.vertices[1] = (SenceVertex){{-0.5, -0.5, 0.5}, {0, 0}, {0, 0, 1}};
+    self.vertices[2] = (SenceVertex){{0.5, 0.5, 0.5}, {1, 1}, {0, 0, 1}};
+    self.vertices[3] = (SenceVertex){{-0.5, -0.5, 0.5}, {0, 0}, {0, 0, 1}};
+    self.vertices[4] = (SenceVertex){{0.5, 0.5, 0.5}, {1, 1}, {0, 0, 1}};
+    self.vertices[5] = (SenceVertex){{0.5, -0.5, 0.5}, {1, 0}, {0, 0, 1}};
     
     // 上面
-    self.vertices[6] = (SenceVertex){{0.5, 0.5, 0.5}, {1, 1}, {0, -1, 0}};
-    self.vertices[7] = (SenceVertex){{-0.5, 0.5, 0.5}, {0, 1}, {0, -1, 0}};
-    self.vertices[8] = (SenceVertex){{0.5, 0.5, -0.5}, {1, 0}, {0, -1, 0}};
-    self.vertices[9] = (SenceVertex){{-0.5, 0.5, 0.5}, {0, 1}, {0, -1, 0}};
-    self.vertices[10] = (SenceVertex){{0.5, 0.5, -0.5}, {1, 0}, {0, -1, 0}};
-    self.vertices[11] = (SenceVertex){{-0.5, 0.5, -0.5}, {0, 0}, {0, -1, 0}};
+    self.vertices[6] = (SenceVertex){{0.5, 0.5, 0.5}, {1, 1}, {0, 1, 0}};
+    self.vertices[7] = (SenceVertex){{-0.5, 0.5, 0.5}, {0, 1}, {0, 1, 0}};
+    self.vertices[8] = (SenceVertex){{0.5, 0.5, -0.5}, {1, 0}, {0, 1, 0}};
+    self.vertices[9] = (SenceVertex){{-0.5, 0.5, 0.5}, {0, 1}, {0, 1, 0}};
+    self.vertices[10] = (SenceVertex){{0.5, 0.5, -0.5}, {1, 0}, {0, 1, 0}};
+    self.vertices[11] = (SenceVertex){{-0.5, 0.5, -0.5}, {0, 0}, {0, 1, 0}};
     
     // 下面
-    self.vertices[12] = (SenceVertex){{0.5, -0.5, 0.5}, {1, 1}, {0, 1, 0}};
-    self.vertices[13] = (SenceVertex){{-0.5, -0.5, 0.5}, {0, 1}, {0, 1, 0}};
-    self.vertices[14] = (SenceVertex){{0.5, -0.5, -0.5}, {1, 0}, {0, 1, 0}};
-    self.vertices[15] = (SenceVertex){{-0.5, -0.5, 0.5}, {0, 1}, {0, 1, 0}};
-    self.vertices[16] = (SenceVertex){{0.5, -0.5, -0.5}, {1, 0}, {0, 1, 0}};
-    self.vertices[17] = (SenceVertex){{-0.5, -0.5, -0.5}, {0, 0}, {0, 1, 0}};
+    self.vertices[12] = (SenceVertex){{0.5, -0.5, 0.5}, {1, 1}, {0, -1, 0}};
+    self.vertices[13] = (SenceVertex){{-0.5, -0.5, 0.5}, {0, 1}, {0, -1, 0}};
+    self.vertices[14] = (SenceVertex){{0.5, -0.5, -0.5}, {1, 0}, {0, -1, 0}};
+    self.vertices[15] = (SenceVertex){{-0.5, -0.5, 0.5}, {0, 1}, {0, -1, 0}};
+    self.vertices[16] = (SenceVertex){{0.5, -0.5, -0.5}, {1, 0}, {0, -1, 0}};
+    self.vertices[17] = (SenceVertex){{-0.5, -0.5, -0.5}, {0, 0}, {0, -1, 0}};
     
     // 左面
-    self.vertices[18] = (SenceVertex){{-0.5, 0.5, 0.5}, {1, 1}, {1, 0, 0}};
-    self.vertices[19] = (SenceVertex){{-0.5, -0.5, 0.5}, {0, 1}, {1, 0, 0}};
-    self.vertices[20] = (SenceVertex){{-0.5, 0.5, -0.5}, {1, 0}, {1, 0, 0}};
-    self.vertices[21] = (SenceVertex){{-0.5, -0.5, 0.5}, {0, 1}, {1, 0, 0}};
-    self.vertices[22] = (SenceVertex){{-0.5, 0.5, -0.5}, {1, 0}, {1, 0, 0}};
-    self.vertices[23] = (SenceVertex){{-0.5, -0.5, -0.5}, {0, 0}, {1, 0, 0}};
+    self.vertices[18] = (SenceVertex){{-0.5, 0.5, 0.5}, {1, 1}, {-1, 0, 0}};
+    self.vertices[19] = (SenceVertex){{-0.5, -0.5, 0.5}, {0, 1}, {-1, 0, 0}};
+    self.vertices[20] = (SenceVertex){{-0.5, 0.5, -0.5}, {1, 0}, {-1, 0, 0}};
+    self.vertices[21] = (SenceVertex){{-0.5, -0.5, 0.5}, {0, 1}, {-1, 0, 0}};
+    self.vertices[22] = (SenceVertex){{-0.5, 0.5, -0.5}, {1, 0}, {-1, 0, 0}};
+    self.vertices[23] = (SenceVertex){{-0.5, -0.5, -0.5}, {0, 0}, {-1, 0, 0}};
     
     // 右面
-    self.vertices[24] = (SenceVertex){{0.5, 0.5, 0.5}, {1, 1}, {-1, 0, 0}};
-    self.vertices[25] = (SenceVertex){{0.5, -0.5, 0.5}, {0, 1}, {-1, 0, 0}};
-    self.vertices[26] = (SenceVertex){{0.5, 0.5, -0.5}, {1, 0}, {-1, 0, 0}};
-    self.vertices[27] = (SenceVertex){{0.5, -0.5, 0.5}, {0, 1}, {-1, 0, 0}};
-    self.vertices[28] = (SenceVertex){{0.5, 0.5, -0.5}, {1, 0}, {-1, 0, 0}};
-    self.vertices[29] = (SenceVertex){{0.5, -0.5, -0.5}, {0, 0}, {-1, 0, 0}};
+    self.vertices[24] = (SenceVertex){{0.5, 0.5, 0.5}, {1, 1}, {1, 0, 0}};
+    self.vertices[25] = (SenceVertex){{0.5, -0.5, 0.5}, {0, 1}, {1, 0, 0}};
+    self.vertices[26] = (SenceVertex){{0.5, 0.5, -0.5}, {1, 0}, {1, 0, 0}};
+    self.vertices[27] = (SenceVertex){{0.5, -0.5, 0.5}, {0, 1}, {1, 0, 0}};
+    self.vertices[28] = (SenceVertex){{0.5, 0.5, -0.5}, {1, 0}, {1, 0, 0}};
+    self.vertices[29] = (SenceVertex){{0.5, -0.5, -0.5}, {0, 0}, {1, 0, 0}};
     
     // 后面
-    self.vertices[30] = (SenceVertex){{-0.5, 0.5, -0.5}, {0, 1}, {0, 0, 1}};
-    self.vertices[31] = (SenceVertex){{-0.5, -0.5, -0.5}, {0, 0}, {0, 0, 1}};
-    self.vertices[32] = (SenceVertex){{0.5, 0.5, -0.5}, {1, 1}, {0, 0, 1}};
-    self.vertices[33] = (SenceVertex){{-0.5, -0.5, -0.5}, {0, 0}, {0, 0, 1}};
-    self.vertices[34] = (SenceVertex){{0.5, 0.5, -0.5}, {1, 1}, {0, 0, 1}};
-    self.vertices[35] = (SenceVertex){{0.5, -0.5, -0.5}, {1, 0}, {0, 0, 1}};
+    self.vertices[30] = (SenceVertex){{-0.5, 0.5, -0.5}, {0, 1}, {0, 0, -1}};
+    self.vertices[31] = (SenceVertex){{-0.5, -0.5, -0.5}, {0, 0}, {0, 0, -1}};
+    self.vertices[32] = (SenceVertex){{0.5, 0.5, -0.5}, {1, 1}, {0, 0, -1}};
+    self.vertices[33] = (SenceVertex){{-0.5, -0.5, -0.5}, {0, 0}, {0, 0, -1}};
+    self.vertices[34] = (SenceVertex){{0.5, 0.5, -0.5}, {1, 1}, {0, 0, -1}};
+    self.vertices[35] = (SenceVertex){{0.5, -0.5, -0.5}, {1, 0}, {0, 0, -1}};
     
     CGRect frame = CGRectMake(0, 100, self.view.frame.size.width, self.view.frame.size.width);
     self.glkView = [[GLKView alloc] initWithFrame:frame context:context];
@@ -128,6 +128,9 @@ static NSInteger const kCoordCount = 36; // 顶点数
     [self.view addSubview:self.glkView];
     
     [EAGLContext setCurrentContext:self.glkView.context];
+    
+    // 默认是(0, 1)，这里用于翻转 z 轴，使正方形朝屏幕外
+    glDepthRangef(1, 0);
     
     NSString *imagePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"sample.jpg"];
     UIImage *image = [UIImage imageWithContentsOfFile:imagePath];
