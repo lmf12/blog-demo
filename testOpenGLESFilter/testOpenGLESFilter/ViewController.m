@@ -20,6 +20,12 @@ typedef struct {
 @property (nonatomic, assign) SenceVertex *vertices;
 @property (nonatomic, strong) EAGLContext *context;
 
+@property (nonatomic, strong) CADisplayLink *displayLink; // 用于刷新屏幕
+@property (nonatomic, assign) NSTimeInterval startTimeInterval; // 开始的时间戳
+
+@property (nonatomic, assign) GLuint program; // 着色器程序
+@property (nonatomic, assign) GLuint vertexBuffer; // 顶点缓存
+
 @end
 
 @implementation ViewController
@@ -27,6 +33,10 @@ typedef struct {
 - (void)dealloc {
     if ([EAGLContext currentContext] == self.context) {
         [EAGLContext setCurrentContext:nil];
+    }
+    if (_vertexBuffer) {
+        glDeleteBuffers(1, &_vertexBuffer);
+        _vertexBuffer = 0;
     }
     if (_vertices) {
         free(_vertices);
@@ -38,6 +48,18 @@ typedef struct {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     [self commonInit];
+    
+    [self startFilerAnimation];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    // 移除 displayLink
+    if (self.displayLink) {
+        [self.displayLink invalidate];
+        self.displayLink = nil;
+    }
 }
 
 - (void)commonInit {
@@ -65,7 +87,7 @@ typedef struct {
     
     glViewport(0, 0, self.drawableWidth, self.drawableHeight);
     
-    GLuint program = [self programWithShaderName:@"normal"];
+    GLuint program = [self programWithShaderName:@"scale"];
     glUseProgram(program);
     
     GLuint positionSlot = glGetAttribLocation(program, "Position");
@@ -88,12 +110,8 @@ typedef struct {
     glEnableVertexAttribArray(textureCoordsSlot);
     glVertexAttribPointer(textureCoordsSlot, 2, GL_FLOAT, GL_FALSE, sizeof(SenceVertex), NULL + offsetof(SenceVertex, textureCoord));
     
-    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-    
-    [self.context presentRenderbuffer:GL_RENDERBUFFER];
-    
-    glDeleteBuffers(1, &vertexBuffer);
-    vertexBuffer = 0;
+    self.program = program;
+    self.vertexBuffer = vertexBuffer; // 将顶点缓存保存，退出时才释放
 }
 
 - (GLuint)createTextureWithImage:(UIImage *)image {
@@ -209,6 +227,41 @@ typedef struct {
     glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_HEIGHT, &backingHeight);
     
     return backingHeight;
+}
+
+// 开始一个滤镜动画
+- (void)startFilerAnimation {
+    if (self.displayLink) {
+        [self.displayLink invalidate];
+        self.displayLink = nil;
+    }
+    
+    self.startTimeInterval = 0;
+    self.displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(timeAction)];
+    [self.displayLink addToRunLoop:[NSRunLoop mainRunLoop]
+                           forMode:NSRunLoopCommonModes];
+}
+
+- (void)timeAction {
+    if (self.startTimeInterval == 0) {
+        self.startTimeInterval = self.displayLink.timestamp;
+    }
+    
+    glUseProgram(self.program);
+    glBindBuffer(GL_ARRAY_BUFFER, self.vertexBuffer);
+    
+    // 传入时间
+    CGFloat currentTime = self.displayLink.timestamp - self.startTimeInterval;
+    GLuint time = glGetUniformLocation(self.program, "Time");
+    glUniform1f(time, currentTime);
+
+    // 清除画布
+    glClear(GL_COLOR_BUFFER_BIT);
+    glClearColor(1, 1, 1, 1);
+    
+    // 重绘
+    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+    [self.context presentRenderbuffer:GL_RENDERBUFFER];
 }
 
 @end
