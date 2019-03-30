@@ -18,6 +18,8 @@
 		E84B6D65224F347E00692D5C /* normal.vsh in Resources */ = {isa = PBXBuildFile; fileRef = E84B6D63224F347E00692D5C /* normal.vsh */; };
 		E84B6D69224F362E00692D5C /* scale.fsh in Resources */ = {isa = PBXBuildFile; fileRef = E84B6D67224F362E00692D5C /* scale.fsh */; };
 		E84B6D6A224F362E00692D5C /* scale.vsh in Resources */ = {isa = PBXBuildFile; fileRef = E84B6D68224F362E00692D5C /* scale.vsh */; };
+		E84B6D6D224F522500692D5C /* FilterBar.m in Sources */ = {isa = PBXBuildFile; fileRef = E84B6D6C224F522500692D5C /* FilterBar.m */; };
+		E84B6D70224F536800692D5C /* FilterBarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E84B6D6F224F536800692D5C /* FilterBarCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +38,10 @@
 		E84B6D63224F347E00692D5C /* normal.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = normal.vsh; sourceTree = "<group>"; };
 		E84B6D67224F362E00692D5C /* scale.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = scale.fsh; sourceTree = "<group>"; };
 		E84B6D68224F362E00692D5C /* scale.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = scale.vsh; sourceTree = "<group>"; };
+		E84B6D6B224F522500692D5C /* FilterBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilterBar.h; sourceTree = "<group>"; };
+		E84B6D6C224F522500692D5C /* FilterBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FilterBar.m; sourceTree = "<group>"; };
+		E84B6D6E224F536800692D5C /* FilterBarCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilterBarCell.h; sourceTree = "<group>"; };
+		E84B6D6F224F536800692D5C /* FilterBarCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FilterBarCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +80,10 @@
 				E84B6D45224F31DC00692D5C /* AppDelegate.m */,
 				E84B6D47224F31DC00692D5C /* ViewController.h */,
 				E84B6D48224F31DC00692D5C /* ViewController.m */,
+				E84B6D6B224F522500692D5C /* FilterBar.h */,
+				E84B6D6C224F522500692D5C /* FilterBar.m */,
+				E84B6D6E224F536800692D5C /* FilterBarCell.h */,
+				E84B6D6F224F536800692D5C /* FilterBarCell.m */,
 				E84B6D4A224F31DC00692D5C /* Main.storyboard */,
 				E84B6D4D224F31DC00692D5C /* Assets.xcassets */,
 				E84B6D4F224F31DC00692D5C /* LaunchScreen.storyboard */,
@@ -187,7 +197,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				E84B6D49224F31DC00692D5C /* ViewController.m in Sources */,
+				E84B6D6D224F522500692D5C /* FilterBar.m in Sources */,
 				E84B6D54224F31DC00692D5C /* main.m in Sources */,
+				E84B6D70224F536800692D5C /* FilterBarCell.m in Sources */,
 				E84B6D46224F31DC00692D5C /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

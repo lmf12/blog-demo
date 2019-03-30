@@ -7,6 +7,7 @@
 //
 
 #import <GLKit/GLKit.h>
+#import "FilterBar.h"
 
 #import "ViewController.h"
 
@@ -15,7 +16,7 @@ typedef struct {
     GLKVector2 textureCoord; // (U, V)
 } SenceVertex;
 
-@interface ViewController ()
+@interface ViewController () <FilterBarDelegate>
 
 @property (nonatomic, assign) SenceVertex *vertices;
 @property (nonatomic, strong) EAGLContext *context;
@@ -25,6 +26,7 @@ typedef struct {
 
 @property (nonatomic, assign) GLuint program; // 着色器程序
 @property (nonatomic, assign) GLuint vertexBuffer; // 顶点缓存
+@property (nonatomic, assign) GLuint textureID; // 纹理 ID
 
 @end
 
@@ -47,6 +49,8 @@ typedef struct {
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    [self setupFilterBar];
+    
     [self commonInit];
     
     [self startFilerAnimation];
@@ -84,33 +88,18 @@ typedef struct {
     NSString *imagePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"sample.jpg"];
     UIImage *image = [UIImage imageWithContentsOfFile:imagePath];
     GLuint textureID = [self createTextureWithImage:image];
+    self.textureID = textureID;  // 将纹理 ID 保存，方便后面切换滤镜的时候重用
     
     glViewport(0, 0, self.drawableWidth, self.drawableHeight);
     
-    GLuint program = [self programWithShaderName:@"scale"];
-    glUseProgram(program);
-    
-    GLuint positionSlot = glGetAttribLocation(program, "Position");
-    GLuint textureSlot = glGetUniformLocation(program, "Texture");
-    GLuint textureCoordsSlot = glGetAttribLocation(program, "TextureCoords");
-    
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, textureID);
-    glUniform1i(textureSlot, 0);
-
     GLuint vertexBuffer;
     glGenBuffers(1, &vertexBuffer);
     glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
     GLsizeiptr bufferSizeBytes = sizeof(SenceVertex) * 4;
     glBufferData(GL_ARRAY_BUFFER, bufferSizeBytes, self.vertices, GL_STATIC_DRAW);
+
+    [self setupNormalShaderProgram]; // 一开始选用默认的着色器
     
-    glEnableVertexAttribArray(positionSlot);
-    glVertexAttribPointer(positionSlot, 3, GL_FLOAT, GL_FALSE, sizeof(SenceVertex), NULL + offsetof(SenceVertex, positionCoord));
-    
-    glEnableVertexAttribArray(textureCoordsSlot);
-    glVertexAttribPointer(textureCoordsSlot, 2, GL_FLOAT, GL_FALSE, sizeof(SenceVertex), NULL + offsetof(SenceVertex, textureCoord));
-    
-    self.program = program;
     self.vertexBuffer = vertexBuffer; // 将顶点缓存保存，退出时才释放
 }
 
@@ -229,6 +218,19 @@ typedef struct {
     return backingHeight;
 }
 
+// 创建滤镜栏
+- (void)setupFilterBar {
+    CGFloat filterBarWidth = [UIScreen mainScreen].bounds.size.width;
+    CGFloat filterBarHeight = 100;
+    CGFloat filterBarY = [UIScreen mainScreen].bounds.size.height - filterBarHeight;
+    FilterBar *filerBar = [[FilterBar alloc] initWithFrame:CGRectMake(0, filterBarY, filterBarWidth, filterBarHeight)];
+    filerBar.delegate = self;
+    [self.view addSubview:filerBar];
+    
+    NSArray *dataSource = @[@"无", @"缩放"];
+    filerBar.itemList = dataSource;
+}
+
 // 开始一个滤镜动画
 - (void)startFilerAnimation {
     if (self.displayLink) {
@@ -262,6 +264,65 @@ typedef struct {
     // 重绘
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
     [self.context presentRenderbuffer:GL_RENDERBUFFER];
+}
+
+#pragma mark - FilterBarDelegate
+
+- (void)filterBar:(FilterBar *)filterBar didScrollToIndex:(NSUInteger)index {
+    if (index == 0) {
+        [self setupNormalShaderProgram];
+    } else if (index == 1) {
+        [self setupScaleShaderProgram];
+    }
+    
+    // 重新开始计算时间
+    [self startFilerAnimation];
+}
+
+#pragma mark - Shader
+
+// 默认着色器程序
+- (void)setupNormalShaderProgram {
+    GLuint program = [self programWithShaderName:@"normal"];
+    glUseProgram(program);
+    
+    GLuint positionSlot = glGetAttribLocation(program, "Position");
+    GLuint textureSlot = glGetUniformLocation(program, "Texture");
+    GLuint textureCoordsSlot = glGetAttribLocation(program, "TextureCoords");
+    
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, self.textureID);
+    glUniform1i(textureSlot, 0);
+    
+    glEnableVertexAttribArray(positionSlot);
+    glVertexAttribPointer(positionSlot, 3, GL_FLOAT, GL_FALSE, sizeof(SenceVertex), NULL + offsetof(SenceVertex, positionCoord));
+    
+    glEnableVertexAttribArray(textureCoordsSlot);
+    glVertexAttribPointer(textureCoordsSlot, 2, GL_FLOAT, GL_FALSE, sizeof(SenceVertex), NULL + offsetof(SenceVertex, textureCoord));
+    
+    self.program = program;
+}
+
+// 缩放着色器程序
+- (void)setupScaleShaderProgram {
+    GLuint program = [self programWithShaderName:@"scale"];
+    glUseProgram(program);
+    
+    GLuint positionSlot = glGetAttribLocation(program, "Position");
+    GLuint textureSlot = glGetUniformLocation(program, "Texture");
+    GLuint textureCoordsSlot = glGetAttribLocation(program, "TextureCoords");
+    
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, self.textureID);
+    glUniform1i(textureSlot, 0);
+    
+    glEnableVertexAttribArray(positionSlot);
+    glVertexAttribPointer(positionSlot, 3, GL_FLOAT, GL_FALSE, sizeof(SenceVertex), NULL + offsetof(SenceVertex, positionCoord));
+    
+    glEnableVertexAttribArray(textureCoordsSlot);
+    glVertexAttribPointer(textureCoordsSlot, 2, GL_FLOAT, GL_FALSE, sizeof(SenceVertex), NULL + offsetof(SenceVertex, textureCoord));
+    
+    self.program = program;
 }
 
 @end
