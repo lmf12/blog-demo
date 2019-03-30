@@ -9,7 +9,9 @@ const float PI = 3.1415926;
 void main (void) {
     float duration = 0.6;
     float maxAmplitude = 0.3;
-    float amplitude = 1.0 + maxAmplitude * abs(sin(Time * (PI / duration)));
+    
+    float time = mod(Time, duration);
+    float amplitude = 1.0 + maxAmplitude * abs(sin(time * (PI / duration)));
     
     gl_Position = vec4(Position.x * amplitude, Position.y * amplitude, Position.zw);
     TextureCoordsVarying = TextureCoords;
