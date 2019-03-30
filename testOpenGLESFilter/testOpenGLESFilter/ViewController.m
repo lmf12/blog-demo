@@ -227,7 +227,7 @@ typedef struct {
     filerBar.delegate = self;
     [self.view addSubview:filerBar];
     
-    NSArray *dataSource = @[@"无", @"缩放"];
+    NSArray *dataSource = @[@"无", @"缩放", @"灵魂出窍"];
     filerBar.itemList = dataSource;
 }
 
@@ -273,6 +273,8 @@ typedef struct {
         [self setupNormalShaderProgram];
     } else if (index == 1) {
         [self setupScaleShaderProgram];
+    } else if (index == 2) {
+        [self setupSoulOutShaderProgram];
     }
     
     // 重新开始计算时间
@@ -283,7 +285,7 @@ typedef struct {
 
 // 默认着色器程序
 - (void)setupNormalShaderProgram {
-    GLuint program = [self programWithShaderName:@"normal"];
+    GLuint program = [self programWithShaderName:@"Normal"];
     glUseProgram(program);
     
     GLuint positionSlot = glGetAttribLocation(program, "Position");
@@ -305,7 +307,7 @@ typedef struct {
 
 // 缩放着色器程序
 - (void)setupScaleShaderProgram {
-    GLuint program = [self programWithShaderName:@"scale"];
+    GLuint program = [self programWithShaderName:@"Scale"];
     glUseProgram(program);
     
     GLuint positionSlot = glGetAttribLocation(program, "Position");
@@ -324,5 +326,28 @@ typedef struct {
     
     self.program = program;
 }
+
+// 灵魂出窍着色器程序
+- (void)setupSoulOutShaderProgram {
+    GLuint program = [self programWithShaderName:@"SoulOut"];
+    glUseProgram(program);
+    
+    GLuint positionSlot = glGetAttribLocation(program, "Position");
+    GLuint textureSlot = glGetUniformLocation(program, "Texture");
+    GLuint textureCoordsSlot = glGetAttribLocation(program, "TextureCoords");
+    
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, self.textureID);
+    glUniform1i(textureSlot, 0);
+    
+    glEnableVertexAttribArray(positionSlot);
+    glVertexAttribPointer(positionSlot, 3, GL_FLOAT, GL_FALSE, sizeof(SenceVertex), NULL + offsetof(SenceVertex, positionCoord));
+    
+    glEnableVertexAttribArray(textureCoordsSlot);
+    glVertexAttribPointer(textureCoordsSlot, 2, GL_FLOAT, GL_FALSE, sizeof(SenceVertex), NULL + offsetof(SenceVertex, textureCoord));
+    
+    self.program = program;
+}
+
 
 @end
