@@ -10,7 +10,7 @@ void main (void) {
     float maxAlpha = 0.4;
     float maxScale = 1.8;
     
-    float progress = Time / duration - floor(Time / duration); // 0~1
+    float progress = mod(Time, duration) / duration; // 0~1
     float alpha = maxAlpha * (1.0 - progress);
     float scale = 1.0 + (maxScale - 1.0) * progress;
     
