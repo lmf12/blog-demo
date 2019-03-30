@@ -227,7 +227,7 @@ typedef struct {
     filerBar.delegate = self;
     [self.view addSubview:filerBar];
     
-    NSArray *dataSource = @[@"无", @"缩放", @"灵魂出窍"];
+    NSArray *dataSource = @[@"无", @"缩放", @"灵魂出窍", @"抖动"];
     filerBar.itemList = dataSource;
 }
 
@@ -275,6 +275,8 @@ typedef struct {
         [self setupScaleShaderProgram];
     } else if (index == 2) {
         [self setupSoulOutShaderProgram];
+    } else if (index == 3) {
+        [self setupShakeShaderProgram];
     }
     
     // 重新开始计算时间
@@ -330,6 +332,28 @@ typedef struct {
 // 灵魂出窍着色器程序
 - (void)setupSoulOutShaderProgram {
     GLuint program = [self programWithShaderName:@"SoulOut"];
+    glUseProgram(program);
+    
+    GLuint positionSlot = glGetAttribLocation(program, "Position");
+    GLuint textureSlot = glGetUniformLocation(program, "Texture");
+    GLuint textureCoordsSlot = glGetAttribLocation(program, "TextureCoords");
+    
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, self.textureID);
+    glUniform1i(textureSlot, 0);
+    
+    glEnableVertexAttribArray(positionSlot);
+    glVertexAttribPointer(positionSlot, 3, GL_FLOAT, GL_FALSE, sizeof(SenceVertex), NULL + offsetof(SenceVertex, positionCoord));
+    
+    glEnableVertexAttribArray(textureCoordsSlot);
+    glVertexAttribPointer(textureCoordsSlot, 2, GL_FLOAT, GL_FALSE, sizeof(SenceVertex), NULL + offsetof(SenceVertex, textureCoord));
+    
+    self.program = program;
+}
+
+// 抖动着色器程序
+- (void)setupShakeShaderProgram {
+    GLuint program = [self programWithShaderName:@"Shake"];
     glUseProgram(program);
     
     GLuint positionSlot = glGetAttribLocation(program, "Position");

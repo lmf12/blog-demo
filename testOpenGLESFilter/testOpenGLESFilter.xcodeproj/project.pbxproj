@@ -22,6 +22,8 @@
 		E84B6D7D224F709400692D5C /* Normal.vsh in Resources */ = {isa = PBXBuildFile; fileRef = E84B6D76224F709400692D5C /* Normal.vsh */; };
 		E84B6D7E224F709400692D5C /* Scale.fsh in Resources */ = {isa = PBXBuildFile; fileRef = E84B6D78224F709400692D5C /* Scale.fsh */; };
 		E84B6D7F224F709400692D5C /* Scale.vsh in Resources */ = {isa = PBXBuildFile; fileRef = E84B6D79224F709400692D5C /* Scale.vsh */; };
+		E84B6D83224F7FCF00692D5C /* Shake.fsh in Resources */ = {isa = PBXBuildFile; fileRef = E84B6D81224F7FCF00692D5C /* Shake.fsh */; };
+		E84B6D84224F7FCF00692D5C /* Shake.vsh in Resources */ = {isa = PBXBuildFile; fileRef = E84B6D82224F7FCF00692D5C /* Shake.vsh */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +48,8 @@
 		E84B6D76224F709400692D5C /* Normal.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Normal.vsh; sourceTree = "<group>"; };
 		E84B6D78224F709400692D5C /* Scale.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Scale.fsh; sourceTree = "<group>"; };
 		E84B6D79224F709400692D5C /* Scale.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Scale.vsh; sourceTree = "<group>"; };
+		E84B6D81224F7FCF00692D5C /* Shake.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shake.fsh; sourceTree = "<group>"; };
+		E84B6D82224F7FCF00692D5C /* Shake.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shake.vsh; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +107,7 @@
 				E84B6D74224F709400692D5C /* Normal */,
 				E84B6D77224F709400692D5C /* Scale */,
 				E84B6D71224F709400692D5C /* SoulOut */,
+				E84B6D80224F7FCF00692D5C /* Shake */,
 			);
 			path = Shader;
 			sourceTree = "<group>";
@@ -132,6 +137,15 @@
 				E84B6D79224F709400692D5C /* Scale.vsh */,
 			);
 			path = Scale;
+			sourceTree = "<group>";
+		};
+		E84B6D80224F7FCF00692D5C /* Shake */ = {
+			isa = PBXGroup;
+			children = (
+				E84B6D81224F7FCF00692D5C /* Shake.fsh */,
+				E84B6D82224F7FCF00692D5C /* Shake.vsh */,
+			);
+			path = Shake;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -200,8 +214,10 @@
 				E84B6D5B224F337900692D5C /* sample.jpg in Resources */,
 				E84B6D7C224F709400692D5C /* Normal.fsh in Resources */,
 				E84B6D7E224F709400692D5C /* Scale.fsh in Resources */,
+				E84B6D84224F7FCF00692D5C /* Shake.vsh in Resources */,
 				E84B6D7A224F709400692D5C /* SoulOut.fsh in Resources */,
 				E84B6D7B224F709400692D5C /* SoulOut.vsh in Resources */,
+				E84B6D83224F7FCF00692D5C /* Shake.fsh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
