@@ -24,6 +24,8 @@
 		E84B6D7F224F709400692D5C /* Scale.vsh in Resources */ = {isa = PBXBuildFile; fileRef = E84B6D79224F709400692D5C /* Scale.vsh */; };
 		E84B6D83224F7FCF00692D5C /* Shake.fsh in Resources */ = {isa = PBXBuildFile; fileRef = E84B6D81224F7FCF00692D5C /* Shake.fsh */; };
 		E84B6D84224F7FCF00692D5C /* Shake.vsh in Resources */ = {isa = PBXBuildFile; fileRef = E84B6D82224F7FCF00692D5C /* Shake.vsh */; };
+		E84B6D88224FA79F00692D5C /* ShineWhite.fsh in Resources */ = {isa = PBXBuildFile; fileRef = E84B6D86224FA79F00692D5C /* ShineWhite.fsh */; };
+		E84B6D89224FA79F00692D5C /* ShineWhite.vsh in Resources */ = {isa = PBXBuildFile; fileRef = E84B6D87224FA79F00692D5C /* ShineWhite.vsh */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +52,8 @@
 		E84B6D79224F709400692D5C /* Scale.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Scale.vsh; sourceTree = "<group>"; };
 		E84B6D81224F7FCF00692D5C /* Shake.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shake.fsh; sourceTree = "<group>"; };
 		E84B6D82224F7FCF00692D5C /* Shake.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shake.vsh; sourceTree = "<group>"; };
+		E84B6D86224FA79F00692D5C /* ShineWhite.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ShineWhite.fsh; sourceTree = "<group>"; };
+		E84B6D87224FA79F00692D5C /* ShineWhite.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ShineWhite.vsh; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +112,7 @@
 				E84B6D77224F709400692D5C /* Scale */,
 				E84B6D71224F709400692D5C /* SoulOut */,
 				E84B6D80224F7FCF00692D5C /* Shake */,
+				E84B6D85224FA79F00692D5C /* ShineWhite */,
 			);
 			path = Shader;
 			sourceTree = "<group>";
@@ -146,6 +151,15 @@
 				E84B6D82224F7FCF00692D5C /* Shake.vsh */,
 			);
 			path = Shake;
+			sourceTree = "<group>";
+		};
+		E84B6D85224FA79F00692D5C /* ShineWhite */ = {
+			isa = PBXGroup;
+			children = (
+				E84B6D86224FA79F00692D5C /* ShineWhite.fsh */,
+				E84B6D87224FA79F00692D5C /* ShineWhite.vsh */,
+			);
+			path = ShineWhite;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -209,6 +223,7 @@
 				E84B6D7F224F709400692D5C /* Scale.vsh in Resources */,
 				E84B6D51224F31DC00692D5C /* LaunchScreen.storyboard in Resources */,
 				E84B6D4E224F31DC00692D5C /* Assets.xcassets in Resources */,
+				E84B6D89224FA79F00692D5C /* ShineWhite.vsh in Resources */,
 				E84B6D7D224F709400692D5C /* Normal.vsh in Resources */,
 				E84B6D4C224F31DC00692D5C /* Main.storyboard in Resources */,
 				E84B6D5B224F337900692D5C /* sample.jpg in Resources */,
@@ -218,6 +233,7 @@
 				E84B6D7A224F709400692D5C /* SoulOut.fsh in Resources */,
 				E84B6D7B224F709400692D5C /* SoulOut.vsh in Resources */,
 				E84B6D83224F7FCF00692D5C /* Shake.fsh in Resources */,
+				E84B6D88224FA79F00692D5C /* ShineWhite.fsh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
