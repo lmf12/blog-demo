@@ -1,4 +1,4 @@
-precision mediump float;
+precision highp float;
 
 uniform sampler2D Texture;
 varying vec2 TextureCoordsVarying;
@@ -12,7 +12,7 @@ float rand(float n) {
 }
 
 void main (void) {
-    float maxJitter = 0.1;
+    float maxJitter = 0.06;
     float duration = 0.3;
     float colorROffset = 0.01;
     float colorBOffset = -0.025;
@@ -23,7 +23,7 @@ void main (void) {
     float jitter = rand(TextureCoordsVarying.y) * 2.0 - 1.0; // -1~1
     bool needOffset = abs(jitter) < maxJitter * amplitude;
     
-    float textureX = TextureCoordsVarying.x + (needOffset ? jitter : (jitter * amplitude * 0.0002));
+    float textureX = TextureCoordsVarying.x + (needOffset ? jitter : (jitter * amplitude * 0.006));
     vec2 textureCoords = vec2(textureX, TextureCoordsVarying.y);
     
     vec4 mask = texture2D(Texture, textureCoords);
