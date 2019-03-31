@@ -227,7 +227,7 @@ typedef struct {
     filerBar.delegate = self;
     [self.view addSubview:filerBar];
     
-    NSArray *dataSource = @[@"无", @"缩放", @"灵魂出窍", @"抖动", @"闪白", @"毛刺"];
+    NSArray *dataSource = @[@"无", @"缩放", @"灵魂出窍", @"抖动", @"闪白", @"毛刺", @"幻觉"];
     filerBar.itemList = dataSource;
 }
 
@@ -281,6 +281,8 @@ typedef struct {
         [self setupShineWhiteShaderProgram];
     } else if (index == 5) {
         [self setupGlitchShaderProgram];
+    } else if (index == 6) {
+        [self setupVertigoShaderProgram];
     }
     
     // 重新开始计算时间
@@ -291,117 +293,42 @@ typedef struct {
 
 // 默认着色器程序
 - (void)setupNormalShaderProgram {
-    GLuint program = [self programWithShaderName:@"Normal"];
-    glUseProgram(program);
-    
-    GLuint positionSlot = glGetAttribLocation(program, "Position");
-    GLuint textureSlot = glGetUniformLocation(program, "Texture");
-    GLuint textureCoordsSlot = glGetAttribLocation(program, "TextureCoords");
-    
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, self.textureID);
-    glUniform1i(textureSlot, 0);
-    
-    glEnableVertexAttribArray(positionSlot);
-    glVertexAttribPointer(positionSlot, 3, GL_FLOAT, GL_FALSE, sizeof(SenceVertex), NULL + offsetof(SenceVertex, positionCoord));
-    
-    glEnableVertexAttribArray(textureCoordsSlot);
-    glVertexAttribPointer(textureCoordsSlot, 2, GL_FLOAT, GL_FALSE, sizeof(SenceVertex), NULL + offsetof(SenceVertex, textureCoord));
-    
-    self.program = program;
+    [self setupShaderProgramWithName:@"Normal"];
 }
 
 // 缩放着色器程序
 - (void)setupScaleShaderProgram {
-    GLuint program = [self programWithShaderName:@"Scale"];
-    glUseProgram(program);
-    
-    GLuint positionSlot = glGetAttribLocation(program, "Position");
-    GLuint textureSlot = glGetUniformLocation(program, "Texture");
-    GLuint textureCoordsSlot = glGetAttribLocation(program, "TextureCoords");
-    
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, self.textureID);
-    glUniform1i(textureSlot, 0);
-    
-    glEnableVertexAttribArray(positionSlot);
-    glVertexAttribPointer(positionSlot, 3, GL_FLOAT, GL_FALSE, sizeof(SenceVertex), NULL + offsetof(SenceVertex, positionCoord));
-    
-    glEnableVertexAttribArray(textureCoordsSlot);
-    glVertexAttribPointer(textureCoordsSlot, 2, GL_FLOAT, GL_FALSE, sizeof(SenceVertex), NULL + offsetof(SenceVertex, textureCoord));
-    
-    self.program = program;
+    [self setupShaderProgramWithName:@"Scale"];
 }
 
 // 灵魂出窍着色器程序
 - (void)setupSoulOutShaderProgram {
-    GLuint program = [self programWithShaderName:@"SoulOut"];
-    glUseProgram(program);
-    
-    GLuint positionSlot = glGetAttribLocation(program, "Position");
-    GLuint textureSlot = glGetUniformLocation(program, "Texture");
-    GLuint textureCoordsSlot = glGetAttribLocation(program, "TextureCoords");
-    
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, self.textureID);
-    glUniform1i(textureSlot, 0);
-    
-    glEnableVertexAttribArray(positionSlot);
-    glVertexAttribPointer(positionSlot, 3, GL_FLOAT, GL_FALSE, sizeof(SenceVertex), NULL + offsetof(SenceVertex, positionCoord));
-    
-    glEnableVertexAttribArray(textureCoordsSlot);
-    glVertexAttribPointer(textureCoordsSlot, 2, GL_FLOAT, GL_FALSE, sizeof(SenceVertex), NULL + offsetof(SenceVertex, textureCoord));
-    
-    self.program = program;
+    [self setupShaderProgramWithName:@"SoulOut"];
 }
 
 // 抖动着色器程序
 - (void)setupShakeShaderProgram {
-    GLuint program = [self programWithShaderName:@"Shake"];
-    glUseProgram(program);
-    
-    GLuint positionSlot = glGetAttribLocation(program, "Position");
-    GLuint textureSlot = glGetUniformLocation(program, "Texture");
-    GLuint textureCoordsSlot = glGetAttribLocation(program, "TextureCoords");
-    
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, self.textureID);
-    glUniform1i(textureSlot, 0);
-    
-    glEnableVertexAttribArray(positionSlot);
-    glVertexAttribPointer(positionSlot, 3, GL_FLOAT, GL_FALSE, sizeof(SenceVertex), NULL + offsetof(SenceVertex, positionCoord));
-    
-    glEnableVertexAttribArray(textureCoordsSlot);
-    glVertexAttribPointer(textureCoordsSlot, 2, GL_FLOAT, GL_FALSE, sizeof(SenceVertex), NULL + offsetof(SenceVertex, textureCoord));
-    
-    self.program = program;
+    [self setupShaderProgramWithName:@"Shake"];
 }
 
 // 闪白着色器程序
 - (void)setupShineWhiteShaderProgram {
-    GLuint program = [self programWithShaderName:@"ShineWhite"];
-    glUseProgram(program);
-    
-    GLuint positionSlot = glGetAttribLocation(program, "Position");
-    GLuint textureSlot = glGetUniformLocation(program, "Texture");
-    GLuint textureCoordsSlot = glGetAttribLocation(program, "TextureCoords");
-    
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, self.textureID);
-    glUniform1i(textureSlot, 0);
-    
-    glEnableVertexAttribArray(positionSlot);
-    glVertexAttribPointer(positionSlot, 3, GL_FLOAT, GL_FALSE, sizeof(SenceVertex), NULL + offsetof(SenceVertex, positionCoord));
-    
-    glEnableVertexAttribArray(textureCoordsSlot);
-    glVertexAttribPointer(textureCoordsSlot, 2, GL_FLOAT, GL_FALSE, sizeof(SenceVertex), NULL + offsetof(SenceVertex, textureCoord));
-    
-    self.program = program;
+    [self setupShaderProgramWithName:@"ShineWhite"];
 }
 
 // 毛刺着色器程序
 - (void)setupGlitchShaderProgram {
-    GLuint program = [self programWithShaderName:@"Glitch"];
+    [self setupShaderProgramWithName:@"Glitch"];
+}
+
+// 幻觉着色器程序
+- (void)setupVertigoShaderProgram {
+    [self setupShaderProgramWithName:@"Vertigo"];
+}
+
+// 初始化着色器程序
+- (void)setupShaderProgramWithName:(NSString *)name {
+    GLuint program = [self programWithShaderName:name];
     glUseProgram(program);
     
     GLuint positionSlot = glGetAttribLocation(program, "Position");
@@ -420,7 +347,5 @@ typedef struct {
     
     self.program = program;
 }
-
-
 
 @end

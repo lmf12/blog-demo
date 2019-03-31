@@ -28,6 +28,8 @@
 		E84B6D89224FA79F00692D5C /* ShineWhite.vsh in Resources */ = {isa = PBXBuildFile; fileRef = E84B6D87224FA79F00692D5C /* ShineWhite.vsh */; };
 		E84B6D8D224FAE7700692D5C /* Glitch.fsh in Resources */ = {isa = PBXBuildFile; fileRef = E84B6D8B224FAE7700692D5C /* Glitch.fsh */; };
 		E84B6D8E224FAE7700692D5C /* Glitch.vsh in Resources */ = {isa = PBXBuildFile; fileRef = E84B6D8C224FAE7700692D5C /* Glitch.vsh */; };
+		E8E99A0B2250BF2D0053806B /* Vertigo.fsh in Resources */ = {isa = PBXBuildFile; fileRef = E8E99A092250BF2D0053806B /* Vertigo.fsh */; };
+		E8E99A0C2250BF2D0053806B /* Vertigo.vsh in Resources */ = {isa = PBXBuildFile; fileRef = E8E99A0A2250BF2D0053806B /* Vertigo.vsh */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +60,8 @@
 		E84B6D87224FA79F00692D5C /* ShineWhite.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ShineWhite.vsh; sourceTree = "<group>"; };
 		E84B6D8B224FAE7700692D5C /* Glitch.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Glitch.fsh; sourceTree = "<group>"; };
 		E84B6D8C224FAE7700692D5C /* Glitch.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Glitch.vsh; sourceTree = "<group>"; };
+		E8E99A092250BF2D0053806B /* Vertigo.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Vertigo.fsh; sourceTree = "<group>"; };
+		E8E99A0A2250BF2D0053806B /* Vertigo.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Vertigo.vsh; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +122,7 @@
 				E84B6D80224F7FCF00692D5C /* Shake */,
 				E84B6D85224FA79F00692D5C /* ShineWhite */,
 				E84B6D8A224FAE7700692D5C /* Glitch */,
+				E8E99A082250BF2D0053806B /* Vertigo */,
 			);
 			path = Shader;
 			sourceTree = "<group>";
@@ -176,6 +181,15 @@
 			name = Glitch;
 			path = testOpenGLESFilter/Shader/Glitch;
 			sourceTree = SOURCE_ROOT;
+		};
+		E8E99A082250BF2D0053806B /* Vertigo */ = {
+			isa = PBXGroup;
+			children = (
+				E8E99A092250BF2D0053806B /* Vertigo.fsh */,
+				E8E99A0A2250BF2D0053806B /* Vertigo.vsh */,
+			);
+			path = Vertigo;
+			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
@@ -237,8 +251,10 @@
 			files = (
 				E84B6D7F224F709400692D5C /* Scale.vsh in Resources */,
 				E84B6D51224F31DC00692D5C /* LaunchScreen.storyboard in Resources */,
+				E8E99A0C2250BF2D0053806B /* Vertigo.vsh in Resources */,
 				E84B6D4E224F31DC00692D5C /* Assets.xcassets in Resources */,
 				E84B6D89224FA79F00692D5C /* ShineWhite.vsh in Resources */,
+				E8E99A0B2250BF2D0053806B /* Vertigo.fsh in Resources */,
 				E84B6D8E224FAE7700692D5C /* Glitch.vsh in Resources */,
 				E84B6D7D224F709400692D5C /* Normal.vsh in Resources */,
 				E84B6D4C224F31DC00692D5C /* Main.storyboard in Resources */,
