@@ -41,7 +41,7 @@ void main (void) {
     float alphaG = 1.0; // G
     float alphaB = 1.0; // B
     
-    vec4 resultMask;
+    vec4 resultMask = vec4(0, 0, 0, 0);
     
     for (float f = 0.0; f < duration; f += timeGap) {
         float tmpTime = f;
