@@ -1,0 +1,24 @@
+PODS:
+  - GPUImage (0.1.7)
+  - Masonry (1.1.0)
+  - Toast (4.0.0)
+
+DEPENDENCIES:
+  - GPUImage
+  - Masonry
+  - Toast (~> 4.0.0)
+
+SPEC REPOS:
+  trunk:
+    - GPUImage
+    - Masonry
+    - Toast
+
+SPEC CHECKSUMS:
+  GPUImage: 733a5f0fab92df9de1c37ba9df520a833ccb406d
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
+
+PODFILE CHECKSUM: 1c45e4b40e9637688da72722f3cba74718e3854d
+
+COCOAPODS: 1.8.4
