@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		22BE19B90F11383141BFBF99 /* libPods-testVideoFilter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 376868100B30095AF7D23F65 /* libPods-testVideoFilter.a */; };
 		E8D023132414D576008E0FE2 /* sample.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = E8D023122414D576008E0FE2 /* sample.mp4 */; };
+		E8D0231624150C5A008E0FE2 /* CustomVideoCompositionInstruction.m in Sources */ = {isa = PBXBuildFile; fileRef = E8D0231524150C5A008E0FE2 /* CustomVideoCompositionInstruction.m */; };
+		E8D0231924150CE7008E0FE2 /* CustomFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = E8D0231824150CE7008E0FE2 /* CustomFilter.m */; };
+		E8D0231C241524E3008E0FE2 /* CustomVideoCompositing.m in Sources */ = {isa = PBXBuildFile; fileRef = E8D0231B241524E3008E0FE2 /* CustomVideoCompositing.m */; };
 		E8F96ED62414998A0068E999 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E8F96ED52414998A0068E999 /* AppDelegate.m */; };
 		E8F96ED92414998A0068E999 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E8F96ED82414998A0068E999 /* SceneDelegate.m */; };
 		E8F96EDC2414998A0068E999 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8F96EDB2414998A0068E999 /* ViewController.m */; };
@@ -25,6 +28,12 @@
 		376868100B30095AF7D23F65 /* libPods-testVideoFilter.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-testVideoFilter.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0AD90F5838590DD824F6805 /* Pods-testVideoFilter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-testVideoFilter.debug.xcconfig"; path = "Target Support Files/Pods-testVideoFilter/Pods-testVideoFilter.debug.xcconfig"; sourceTree = "<group>"; };
 		E8D023122414D576008E0FE2 /* sample.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = sample.mp4; sourceTree = "<group>"; };
+		E8D0231424150C5A008E0FE2 /* CustomVideoCompositionInstruction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomVideoCompositionInstruction.h; sourceTree = "<group>"; };
+		E8D0231524150C5A008E0FE2 /* CustomVideoCompositionInstruction.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomVideoCompositionInstruction.m; sourceTree = "<group>"; };
+		E8D0231724150CE7008E0FE2 /* CustomFilter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomFilter.h; sourceTree = "<group>"; };
+		E8D0231824150CE7008E0FE2 /* CustomFilter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomFilter.m; sourceTree = "<group>"; };
+		E8D0231A241524E3008E0FE2 /* CustomVideoCompositing.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomVideoCompositing.h; sourceTree = "<group>"; };
+		E8D0231B241524E3008E0FE2 /* CustomVideoCompositing.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomVideoCompositing.m; sourceTree = "<group>"; };
 		E8F96ED12414998A0068E999 /* testVideoFilter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = testVideoFilter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8F96ED42414998A0068E999 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		E8F96ED52414998A0068E999 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -116,6 +125,12 @@
 			children = (
 				E8F96EF524149F390068E999 /* AVFoundationViewController.h */,
 				E8F96EF424149F390068E999 /* AVFoundationViewController.m */,
+				E8D0231424150C5A008E0FE2 /* CustomVideoCompositionInstruction.h */,
+				E8D0231524150C5A008E0FE2 /* CustomVideoCompositionInstruction.m */,
+				E8D0231A241524E3008E0FE2 /* CustomVideoCompositing.h */,
+				E8D0231B241524E3008E0FE2 /* CustomVideoCompositing.m */,
+				E8D0231724150CE7008E0FE2 /* CustomFilter.h */,
+				E8D0231824150CE7008E0FE2 /* CustomFilter.m */,
 			);
 			path = AVFoundation;
 			sourceTree = "<group>";
@@ -246,10 +261,13 @@
 			files = (
 				E8F96EDC2414998A0068E999 /* ViewController.m in Sources */,
 				E8F96ED62414998A0068E999 /* AppDelegate.m in Sources */,
+				E8D0231924150CE7008E0FE2 /* CustomFilter.m in Sources */,
 				E8F96EE72414998E0068E999 /* main.m in Sources */,
 				E8F96EFA24149F390068E999 /* GPUImageViewController.m in Sources */,
 				E8F96EF924149F390068E999 /* AVFoundationViewController.m in Sources */,
+				E8D0231624150C5A008E0FE2 /* CustomVideoCompositionInstruction.m in Sources */,
 				E8F96ED92414998A0068E999 /* SceneDelegate.m in Sources */,
+				E8D0231C241524E3008E0FE2 /* CustomVideoCompositing.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
