@@ -113,6 +113,7 @@
         CGSize size = CGSizeMake(CVPixelBufferGetWidth(pixelBuffer),
                                  CVPixelBufferGetHeight(pixelBuffer));
         
+        [GPUImageContext setActiveShaderProgram:nil];
         GPUImageTextureInput *textureInput = [[GPUImageTextureInput alloc] initWithTexture:textureID size:size];
         GPUImageSmoothToonFilter *filter = [[GPUImageSmoothToonFilter alloc] init];
         [textureInput addTarget:filter];
