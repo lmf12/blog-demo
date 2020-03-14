@@ -12,6 +12,12 @@
 		E8D0231624150C5A008E0FE2 /* CustomVideoCompositionInstruction.m in Sources */ = {isa = PBXBuildFile; fileRef = E8D0231524150C5A008E0FE2 /* CustomVideoCompositionInstruction.m */; };
 		E8D0231924150CE7008E0FE2 /* CustomFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = E8D0231824150CE7008E0FE2 /* CustomFilter.m */; };
 		E8D0231C241524E3008E0FE2 /* CustomVideoCompositing.m in Sources */ = {isa = PBXBuildFile; fileRef = E8D0231B241524E3008E0FE2 /* CustomVideoCompositing.m */; };
+		E8F289CE241C885C00B57105 /* YUVConversion.fsh in Resources */ = {isa = PBXBuildFile; fileRef = E8F289C5241C885C00B57105 /* YUVConversion.fsh */; };
+		E8F289CF241C885C00B57105 /* YUVConversion.vsh in Resources */ = {isa = PBXBuildFile; fileRef = E8F289C6241C885C00B57105 /* YUVConversion.vsh */; };
+		E8F289D1241C885C00B57105 /* MFShaderHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = E8F289C9241C885C00B57105 /* MFShaderHelper.m */; };
+		E8F289D2241C885C00B57105 /* MFPixelBufferHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = E8F289CA241C885C00B57105 /* MFPixelBufferHelper.m */; };
+		E8F289DB241CB52900B57105 /* Normal.fsh in Resources */ = {isa = PBXBuildFile; fileRef = E8F289D9241CB52900B57105 /* Normal.fsh */; };
+		E8F289DC241CB52900B57105 /* Normal.vsh in Resources */ = {isa = PBXBuildFile; fileRef = E8F289DA241CB52900B57105 /* Normal.vsh */; };
 		E8F96ED62414998A0068E999 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E8F96ED52414998A0068E999 /* AppDelegate.m */; };
 		E8F96ED92414998A0068E999 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E8F96ED82414998A0068E999 /* SceneDelegate.m */; };
 		E8F96EDC2414998A0068E999 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E8F96EDB2414998A0068E999 /* ViewController.m */; };
@@ -34,6 +40,14 @@
 		E8D0231824150CE7008E0FE2 /* CustomFilter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomFilter.m; sourceTree = "<group>"; };
 		E8D0231A241524E3008E0FE2 /* CustomVideoCompositing.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomVideoCompositing.h; sourceTree = "<group>"; };
 		E8D0231B241524E3008E0FE2 /* CustomVideoCompositing.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomVideoCompositing.m; sourceTree = "<group>"; };
+		E8F289C5241C885C00B57105 /* YUVConversion.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = YUVConversion.fsh; sourceTree = "<group>"; };
+		E8F289C6241C885C00B57105 /* YUVConversion.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = YUVConversion.vsh; sourceTree = "<group>"; };
+		E8F289C9241C885C00B57105 /* MFShaderHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFShaderHelper.m; sourceTree = "<group>"; };
+		E8F289CA241C885C00B57105 /* MFPixelBufferHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFPixelBufferHelper.m; sourceTree = "<group>"; };
+		E8F289CB241C885C00B57105 /* MFShaderHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFShaderHelper.h; sourceTree = "<group>"; };
+		E8F289CC241C885C00B57105 /* MFPixelBufferHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFPixelBufferHelper.h; sourceTree = "<group>"; };
+		E8F289D9241CB52900B57105 /* Normal.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Normal.fsh; sourceTree = "<group>"; };
+		E8F289DA241CB52900B57105 /* Normal.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Normal.vsh; sourceTree = "<group>"; };
 		E8F96ED12414998A0068E999 /* testVideoFilter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = testVideoFilter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8F96ED42414998A0068E999 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		E8F96ED52414998A0068E999 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -81,6 +95,28 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		E8F289C3241C885C00B57105 /* Shader */ = {
+			isa = PBXGroup;
+			children = (
+				E8F289D9241CB52900B57105 /* Normal.fsh */,
+				E8F289DA241CB52900B57105 /* Normal.vsh */,
+				E8F289C5241C885C00B57105 /* YUVConversion.fsh */,
+				E8F289C6241C885C00B57105 /* YUVConversion.vsh */,
+			);
+			path = Shader;
+			sourceTree = "<group>";
+		};
+		E8F289C8241C885C00B57105 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				E8F289C9241C885C00B57105 /* MFShaderHelper.m */,
+				E8F289CA241C885C00B57105 /* MFPixelBufferHelper.m */,
+				E8F289CB241C885C00B57105 /* MFShaderHelper.h */,
+				E8F289CC241C885C00B57105 /* MFPixelBufferHelper.h */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		E8F96EC82414998A0068E999 = {
 			isa = PBXGroup;
 			children = (
@@ -114,6 +150,8 @@
 				E8F96EE22414998E0068E999 /* LaunchScreen.storyboard */,
 				E8F96EDD2414998A0068E999 /* Main.storyboard */,
 				E8F96EE02414998E0068E999 /* Assets.xcassets */,
+				E8F289C3241C885C00B57105 /* Shader */,
+				E8F289C8241C885C00B57105 /* Utils */,
 				E8F96EF324149F390068E999 /* AVFoundation */,
 				E8F96EF624149F390068E999 /* GPUImage */,
 			);
@@ -203,8 +241,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E8F289CE241C885C00B57105 /* YUVConversion.fsh in Resources */,
 				E8F96EE42414998E0068E999 /* LaunchScreen.storyboard in Resources */,
+				E8F289DC241CB52900B57105 /* Normal.vsh in Resources */,
 				E8F96EE12414998E0068E999 /* Assets.xcassets in Resources */,
+				E8F289CF241C885C00B57105 /* YUVConversion.vsh in Resources */,
+				E8F289DB241CB52900B57105 /* Normal.fsh in Resources */,
 				E8F96EDF2414998A0068E999 /* Main.storyboard in Resources */,
 				E8D023132414D576008E0FE2 /* sample.mp4 in Resources */,
 			);
@@ -261,6 +303,7 @@
 			files = (
 				E8F96EDC2414998A0068E999 /* ViewController.m in Sources */,
 				E8F96ED62414998A0068E999 /* AppDelegate.m in Sources */,
+				E8F289D2241C885C00B57105 /* MFPixelBufferHelper.m in Sources */,
 				E8D0231924150CE7008E0FE2 /* CustomFilter.m in Sources */,
 				E8F96EE72414998E0068E999 /* main.m in Sources */,
 				E8F96EFA24149F390068E999 /* GPUImageViewController.m in Sources */,
@@ -268,6 +311,7 @@
 				E8D0231624150C5A008E0FE2 /* CustomVideoCompositionInstruction.m in Sources */,
 				E8F96ED92414998A0068E999 /* SceneDelegate.m in Sources */,
 				E8D0231C241524E3008E0FE2 /* CustomVideoCompositing.m in Sources */,
+				E8F289D1241C885C00B57105 /* MFShaderHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
