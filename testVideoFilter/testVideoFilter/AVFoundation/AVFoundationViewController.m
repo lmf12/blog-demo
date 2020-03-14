@@ -8,6 +8,8 @@
 
 #import <AVFoundation/AVFoundation.h>
 #import <Masonry.h>
+#import <Photos/Photos.h>
+#import <Toast.h>
 
 #import "CustomVideoCompositing.h"
 #import "CustomVideoCompositionInstruction.h"
@@ -16,12 +18,18 @@
 @interface AVFoundationViewController ()
 
 @property (nonatomic, strong) AVPlayer *player;
+@property (nonatomic, strong) AVURLAsset *asset;
 @property (nonatomic, strong) AVPlayerItem *playerItem;
 @property (nonatomic, strong) AVPlayerLayer *playerLayer;
+@property (nonatomic, strong) AVAssetExportSession *exportSession;
 @property (nonatomic, strong) AVMutableVideoComposition *videoComposition;
+
+@property (nonatomic, strong) NSString *exportPath;
 
 @property (nonatomic, strong) UIButton *playButton;
 @property (nonatomic, strong) UIButton *exportButton;
+
+@property (nonatomic, assign) BOOL isExporting;
 
 @end
 
@@ -80,16 +88,16 @@
 - (void)setupPlayer {
     // asset
     NSURL *url = [[NSBundle mainBundle] URLForResource:@"sample" withExtension:@"mp4"];
-    AVURLAsset *asset = [AVURLAsset assetWithURL:url];
+    self.asset = [AVURLAsset assetWithURL:url];
     
     // videoComposition
-    self.videoComposition = [self createVideoCompositionWithAsset:asset];
+    self.videoComposition = [self createVideoCompositionWithAsset:self.asset];
     self.videoComposition.customVideoCompositorClass = [CustomVideoCompositing class];
     
     // playerItem
-    self.playerItem = [[AVPlayerItem alloc] initWithAsset:asset];
+    self.playerItem = [[AVPlayerItem alloc] initWithAsset:self.asset];
     self.playerItem.videoComposition = self.videoComposition;
-
+    
     // player
     self.player = [[AVPlayer alloc] initWithPlayerItem:self.playerItem];
     
@@ -133,6 +141,10 @@
 #pragma mark - Action
 
 - (void)playAction:(UIButton *)button {
+    if (self.isExporting) {
+        return;
+    }
+    
     button.selected = !button.selected;
     if (button.selected) {
         [self.player play];
@@ -142,7 +154,75 @@
 }
 
 - (void)exportAction:(UIButton *)button {
+    if (self.isExporting) {
+        return;
+    }
+    self.isExporting = YES;
     
+    // 先暂停播放
+    [self.player pause];
+    self.playButton.selected = NO;
+    
+    [self.view makeToastActivity:CSToastPositionCenter];
+ 
+    // 创建导出任务
+    self.exportSession = [[AVAssetExportSession alloc] initWithAsset:self.asset presetName:AVAssetExportPresetHighestQuality];
+    self.exportSession.videoComposition = self.videoComposition;
+    self.exportSession.outputFileType = AVFileTypeMPEG4;
+    
+    NSString *fileName = [NSString stringWithFormat:@"%f.m4v", [[NSDate date] timeIntervalSince1970] * 1000];
+    self.exportPath = [NSTemporaryDirectory() stringByAppendingPathComponent:fileName];
+    self.exportSession.outputURL = [NSURL fileURLWithPath:self.exportPath];
+    
+    __weak typeof(self) weakself = self;
+    [self.exportSession exportAsynchronouslyWithCompletionHandler:^{
+        [weakself saveVideo:weakself.exportPath completion:^(BOOL success) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [weakself.view hideToastActivity];
+                if (success) {
+                    [weakself.view.window makeToast:@"保存成功"];
+                } else {
+                    [weakself.view.window makeToast:@"保存失败"];
+                }
+                weakself.isExporting = NO;
+            });
+        }];
+    }];
+}
+
+#pragma mark - Private
+
+// 保存视频到相册
+- (void)saveVideo:(NSString *)path completion:(void (^)(BOOL success))completion {
+    void (^saveBlock)(void) = ^ {
+        NSURL *url = [NSURL fileURLWithPath:path];
+        [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
+            [PHAssetChangeRequest creationRequestForAssetFromVideoAtFileURL:url];
+        } completionHandler:^(BOOL success, NSError * _Nullable error) {
+            if (completion) {
+                completion(success);
+            }
+        }];
+    };
+    
+    PHAuthorizationStatus authStatus = [PHPhotoLibrary authorizationStatus];
+    if (authStatus == PHAuthorizationStatusNotDetermined) {
+        [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
+            if (status == PHAuthorizationStatusAuthorized) {
+                saveBlock();
+            } else {
+                if (completion) {
+                    completion(NO);
+                }
+            }
+        }];
+    } else if (authStatus != PHAuthorizationStatusAuthorized) {
+        if (completion) {
+            completion(NO);
+        }
+    } else {
+        saveBlock();
+    }
 }
 
 @end
