@@ -85,8 +85,11 @@ typedef struct {
 - (void)setupTexture {
     MTKTextureLoader *textureLoader = [[MTKTextureLoader alloc] initWithDevice:self.mtkView.device];
     UIImage *image = [UIImage imageNamed:@"sample.jpg"];
+    NSDictionary *options = @{
+        MTKTextureLoaderOptionSRGB : @NO
+    };
     self.texture = [textureLoader newTextureWithCGImage:image.CGImage
-                                                options:nil
+                                                options:options
                                                   error:NULL];
 }
 
