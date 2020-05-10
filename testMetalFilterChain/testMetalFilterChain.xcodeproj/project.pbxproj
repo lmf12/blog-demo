@@ -20,6 +20,7 @@
 		E870738924679DC50088D38D /* mask.png in Resources */ = {isa = PBXBuildFile; fileRef = E870738624679DC50088D38D /* mask.png */; };
 		E870738A24679DC50088D38D /* glasses.png in Resources */ = {isa = PBXBuildFile; fileRef = E870738724679DC50088D38D /* glasses.png */; };
 		E870738B24679DC50088D38D /* hat.png in Resources */ = {isa = PBXBuildFile; fileRef = E870738824679DC50088D38D /* hat.png */; };
+		E87073912467E7840088D38D /* FilterChain.m in Sources */ = {isa = PBXBuildFile; fileRef = E87073902467E7840088D38D /* FilterChain.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,8 @@
 		E870738724679DC50088D38D /* glasses.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = glasses.png; sourceTree = "<group>"; };
 		E870738824679DC50088D38D /* hat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hat.png; sourceTree = "<group>"; };
 		E870738C2467B9FF0088D38D /* MetalTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MetalTypes.h; sourceTree = "<group>"; };
+		E870738F2467E7840088D38D /* FilterChain.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilterChain.h; sourceTree = "<group>"; };
+		E87073902467E7840088D38D /* FilterChain.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FilterChain.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +87,8 @@
 				E870738C2467B9FF0088D38D /* MetalTypes.h */,
 				E87073832461C1A30088D38D /* Filter.h */,
 				E87073842461C1A30088D38D /* Filter.m */,
+				E870738F2467E7840088D38D /* FilterChain.h */,
+				E87073902467E7840088D38D /* FilterChain.m */,
 				E870737F2461BEEA0088D38D /* default.metal */,
 				E87073802461BEEA0088D38D /* sample.jpg */,
 				E870738724679DC50088D38D /* glasses.png */,
@@ -173,6 +178,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E870736E2461BEA50088D38D /* ViewController.m in Sources */,
+				E87073912467E7840088D38D /* FilterChain.m in Sources */,
 				E87073852461C1A30088D38D /* Filter.m in Sources */,
 				E87073682461BEA50088D38D /* AppDelegate.m in Sources */,
 				E87073792461BEA70088D38D /* main.m in Sources */,

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -9,16 +11,79 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cvR-dd-r0J">
+                                <rect key="frame" x="53" y="772" width="60" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="bTp-4x-2JD"/>
+                                    <constraint firstAttribute="width" constant="60" id="qq7-7Y-Sza"/>
+                                </constraints>
+                                <state key="normal" title="帽子"/>
+                                <connections>
+                                    <action selector="hatAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="N7L-9o-c7o"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RBR-Vh-LUt">
+                                <rect key="frame" x="135.5" y="772" width="60" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="5O1-hs-0rR"/>
+                                    <constraint firstAttribute="width" constant="60" id="6hu-3v-3j0"/>
+                                </constraints>
+                                <state key="normal" title="眼镜"/>
+                                <connections>
+                                    <action selector="glassesAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Jsa-Kr-PRC"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gJj-fG-yfh">
+                                <rect key="frame" x="218.5" y="772" width="60" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="5XF-bt-qjH"/>
+                                    <constraint firstAttribute="height" constant="40" id="ECW-1x-ILj"/>
+                                </constraints>
+                                <state key="normal" title="口罩"/>
+                                <connections>
+                                    <action selector="maskAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Y9u-Y9-aM1"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q9U-Il-hkz">
+                                <rect key="frame" x="301" y="772" width="60" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="dFp-GA-KbY"/>
+                                    <constraint firstAttribute="width" constant="60" id="tqh-ac-Sp0"/>
+                                </constraints>
+                                <state key="normal" title="重置"/>
+                                <connections>
+                                    <action selector="resetAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="GAW-IA-Qia"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="RBR-Vh-LUt" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" multiplier="0.8" id="1Ug-cM-dka"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Q9U-Il-hkz" secondAttribute="bottom" constant="50" id="FCi-HG-Ujs"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="RBR-Vh-LUt" secondAttribute="bottom" constant="50" id="KN7-Jb-Ywl"/>
+                            <constraint firstItem="Q9U-Il-hkz" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" multiplier="1.6" id="OBU-HQ-H7m"/>
+                            <constraint firstItem="cvR-dd-r0J" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" multiplier="0.4" id="PyX-jJ-2hC"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="gJj-fG-yfh" secondAttribute="bottom" constant="50" id="QuB-RG-usi"/>
+                            <constraint firstItem="gJj-fG-yfh" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" multiplier="1.2" id="kjS-ql-bV6"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="cvR-dd-r0J" secondAttribute="bottom" constant="50" id="x08-qb-Hze"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="glassesButton" destination="RBR-Vh-LUt" id="0y2-HC-mft"/>
+                        <outlet property="hatButton" destination="cvR-dd-r0J" id="Mc5-U1-MrI"/>
+                        <outlet property="maskButton" destination="gJj-fG-yfh" id="sZV-6b-JqB"/>
+                        <outlet property="resetButton" destination="Q9U-Il-hkz" id="9xH-zp-PCe"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="139" y="100"/>
         </scene>
     </scenes>
 </document>

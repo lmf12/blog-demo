@@ -10,7 +10,8 @@
 #import <MetalKit/MetalKit.h>
 #import <GLKit/GLKit.h>
 
-#import "Filter.h"
+#import "FilterChain.h"
+
 #import "ViewController.h"
 
 @interface ViewController () <MTKViewDelegate>
@@ -24,6 +25,14 @@
 @property (nonatomic, strong) Filter *hatFilter;
 @property (nonatomic, strong) Filter *glassesFilter;
 @property (nonatomic, strong) Filter *maskFilter;
+
+@property (nonatomic, strong) FilterChain *filterChain;
+
+@property (weak, nonatomic) IBOutlet UIButton *hatButton;
+@property (weak, nonatomic) IBOutlet UIButton *glassesButton;
+@property (weak, nonatomic) IBOutlet UIButton *maskButton;
+@property (weak, nonatomic) IBOutlet UIButton *resetButton;
+
 
 @end
 
@@ -39,6 +48,12 @@
     [self setupHatFilter];
     [self setupGlassesFilter];
     [self setupMaskFilter];
+    [self setupFilterChain];
+    
+    [self configButton:self.hatButton];
+    [self configButton:self.glassesButton];
+    [self configButton:self.maskButton];
+    [self configButton:self.resetButton];
 }
 
 /// 初始化 MTKView
@@ -98,6 +113,11 @@
                                                   error:NULL];
 }
 
+// 初始化滤镜链
+- (void)setupFilterChain {
+    self.filterChain = [[FilterChain alloc] init];
+}
+
 // 初始化帽子滤镜
 - (void)setupHatFilter {
     self.hatFilter = [[Filter alloc] init];
@@ -144,11 +164,56 @@
     return ret;
 }
 
+// 配置按钮
+- (void)configButton:(UIButton *)button {
+    [button setBackgroundColor:[UIColor blackColor]];
+    button.tintColor = [UIColor clearColor];
+    button.layer.cornerRadius = 5.0;
+    button.layer.masksToBounds = YES;
+    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor greenColor] forState:UIControlStateSelected];
+}
+
+#pragma mark - Action
+
+- (IBAction)hatAction:(UIButton *)sender {
+    if (sender.selected) {
+        return;
+    }
+    sender.selected = YES;
+    [self.filterChain addFilter:self.hatFilter];
+}
+
+- (IBAction)glassesAction:(UIButton *)sender {
+    if (sender.selected) {
+        return;
+    }
+    sender.selected = YES;
+    [self.filterChain addFilter:self.glassesFilter];
+}
+
+- (IBAction)maskAction:(UIButton *)sender {
+    if (sender.selected) {
+        return;
+    }
+    sender.selected = YES;
+    [self.filterChain addFilter:self.maskFilter];
+}
+
+- (IBAction)resetAction:(UIButton *)sender {
+    self.hatButton.selected = NO;
+    self.glassesButton.selected = NO;
+    self.maskButton.selected = NO;
+    
+    [self.filterChain removeAllFilter];
+}
+
+
 #pragma mark - MTKViewDelegate
 
 - (void)drawInMTKView:(MTKView *)view {
     // 添加滤镜
-    id <MTLTexture> resultTexture = [self.maskFilter applyEffectWithTexture:self.texture];
+    id <MTLTexture> resultTexture = [self.filterChain applyEffectWithTexture:self.texture];
     
     id <MTLCommandBuffer> commandBuffer = [self.commandQueue commandBuffer];
     MTLRenderPassDescriptor *renderPassDescriptor = self.mtkView.currentRenderPassDescriptor;
