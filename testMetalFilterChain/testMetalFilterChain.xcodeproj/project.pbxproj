@@ -17,6 +17,9 @@
 		E87073812461BEEA0088D38D /* default.metal in Sources */ = {isa = PBXBuildFile; fileRef = E870737F2461BEEA0088D38D /* default.metal */; };
 		E87073822461BEEA0088D38D /* sample.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E87073802461BEEA0088D38D /* sample.jpg */; };
 		E87073852461C1A30088D38D /* Filter.m in Sources */ = {isa = PBXBuildFile; fileRef = E87073842461C1A30088D38D /* Filter.m */; };
+		E870738924679DC50088D38D /* mask.png in Resources */ = {isa = PBXBuildFile; fileRef = E870738624679DC50088D38D /* mask.png */; };
+		E870738A24679DC50088D38D /* glasses.png in Resources */ = {isa = PBXBuildFile; fileRef = E870738724679DC50088D38D /* glasses.png */; };
+		E870738B24679DC50088D38D /* hat.png in Resources */ = {isa = PBXBuildFile; fileRef = E870738824679DC50088D38D /* hat.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +39,10 @@
 		E87073802461BEEA0088D38D /* sample.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sample.jpg; sourceTree = "<group>"; };
 		E87073832461C1A30088D38D /* Filter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Filter.h; sourceTree = "<group>"; };
 		E87073842461C1A30088D38D /* Filter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Filter.m; sourceTree = "<group>"; };
+		E870738624679DC50088D38D /* mask.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mask.png; sourceTree = "<group>"; };
+		E870738724679DC50088D38D /* glasses.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = glasses.png; sourceTree = "<group>"; };
+		E870738824679DC50088D38D /* hat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hat.png; sourceTree = "<group>"; };
+		E870738C2467B9FF0088D38D /* MetalTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MetalTypes.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,10 +81,14 @@
 				E870736A2461BEA50088D38D /* SceneDelegate.m */,
 				E870736C2461BEA50088D38D /* ViewController.h */,
 				E870736D2461BEA50088D38D /* ViewController.m */,
+				E870738C2467B9FF0088D38D /* MetalTypes.h */,
 				E87073832461C1A30088D38D /* Filter.h */,
 				E87073842461C1A30088D38D /* Filter.m */,
 				E870737F2461BEEA0088D38D /* default.metal */,
 				E87073802461BEEA0088D38D /* sample.jpg */,
+				E870738724679DC50088D38D /* glasses.png */,
+				E870738824679DC50088D38D /* hat.png */,
+				E870738624679DC50088D38D /* mask.png */,
 				E870736F2461BEA50088D38D /* Main.storyboard */,
 				E87073722461BEA70088D38D /* Assets.xcassets */,
 				E87073742461BEA70088D38D /* LaunchScreen.storyboard */,
@@ -145,9 +156,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				E87073762461BEA70088D38D /* LaunchScreen.storyboard in Resources */,
+				E870738924679DC50088D38D /* mask.png in Resources */,
+				E870738A24679DC50088D38D /* glasses.png in Resources */,
 				E87073732461BEA70088D38D /* Assets.xcassets in Resources */,
 				E87073712461BEA50088D38D /* Main.storyboard in Resources */,
 				E87073822461BEEA0088D38D /* sample.jpg in Resources */,
+				E870738B24679DC50088D38D /* hat.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

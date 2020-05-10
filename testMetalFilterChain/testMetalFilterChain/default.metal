@@ -19,25 +19,55 @@ typedef struct {
     float2 texCoords;
 } VertexOut;
 
+typedef struct {
+    float4x4 matrix;
+} Constants;
 
-vertex VertexOut vertexShader(const device VertexIn *vertexArray [[buffer(0)]],
-                              unsigned int vertexID [[vertex_id]]) {
+typedef struct {
+    float4 position [[position]];
+    float2 texCoords;
+    float2 overlayTexCoords;
+} OverlayVertexOut;
+
+// default
+
+vertex VertexOut defaultVertexShader(const device VertexIn *vertexArray [[buffer(0)]],
+                                     unsigned int vertexID [[vertex_id]]) {
     VertexOut vertexOut;
     vertexOut.position = vertexArray[vertexID].position;
     vertexOut.texCoords = vertexArray[vertexID].texCoords;
     return vertexOut;
 }
 
-fragment float4 fragmentShader(VertexOut vertexIn [[stage_in]],
-                               texture2d <float, access::sample> inputImage [[texture(0)]]) {
+fragment float4 defaultFragmentShader(VertexOut vertexIn [[stage_in]],
+                                      texture2d <float, access::sample> inputImage [[texture(0)]]) {
     constexpr sampler textureSampler (mag_filter::linear, min_filter::linear);
     float4 color = inputImage.sample(textureSampler, vertexIn.texCoords);
-    
-    int x = (int)(vertexIn.texCoords.x / 0.2);
-    int y = (int)(vertexIn.texCoords.y / 0.2);
-    
-    if ((y * 5 + x) % 2 == 1) {
-        color = float4(1.0, 1.0, 1.0, 1.0);
-    }
     return color;
+}
+
+
+// overlay
+
+vertex OverlayVertexOut overlayVertexShader(const device VertexIn *vertexArray [[buffer(0)]],
+                                            constant Constants *constants [[buffer(1)]],
+                                            unsigned int vertexID [[vertex_id]]) {
+    OverlayVertexOut vertexOut;
+    vertexOut.position = vertexArray[vertexID].position;
+    vertexOut.texCoords = vertexArray[vertexID].texCoords;
+    float4 overlayTexCoords = float4(vertexArray[vertexID].texCoords.x,
+                                     vertexArray[vertexID].texCoords.y,
+                                     0,
+                                     1);
+    vertexOut.overlayTexCoords = (constants->matrix * overlayTexCoords).xy;
+    return vertexOut;
+}
+
+fragment float4 overlayFragmentShader(OverlayVertexOut vertexIn [[stage_in]],
+                                      texture2d <float, access::sample> inputImage [[texture(0)]],
+                                      texture2d <float, access::sample> overlayImage [[texture(1)]]) {
+    constexpr sampler textureSampler (mag_filter::linear, min_filter::linear);
+    float4 backgroundColor = inputImage.sample(textureSampler, vertexIn.texCoords);
+    float4 overlayColor = overlayImage.sample(textureSampler, vertexIn.overlayTexCoords);
+    return overlayColor * overlayColor.a + backgroundColor * (1 - overlayColor.a);
 }

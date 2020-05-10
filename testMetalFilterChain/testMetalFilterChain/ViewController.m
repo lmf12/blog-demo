@@ -8,6 +8,7 @@
 
 
 #import <MetalKit/MetalKit.h>
+#import <GLKit/GLKit.h>
 
 #import "Filter.h"
 #import "ViewController.h"
@@ -20,7 +21,9 @@
 @property (nonatomic, strong) id <MTLBuffer> vertixBuffer;
 @property (nonatomic, strong) id <MTLTexture> texture;
 
-@property (nonatomic, strong) Filter *filter;
+@property (nonatomic, strong) Filter *hatFilter;
+@property (nonatomic, strong) Filter *glassesFilter;
+@property (nonatomic, strong) Filter *maskFilter;
 
 @end
 
@@ -33,7 +36,9 @@
     [self setupPipeline];
     [self setupVertex];
     [self setupTexture];
-    [self setupFilter];
+    [self setupHatFilter];
+    [self setupGlassesFilter];
+    [self setupMaskFilter];
 }
 
 /// 初始化 MTKView
@@ -52,8 +57,8 @@
     // 获取 library
     id <MTLLibrary> library = [self.mtkView.device newDefaultLibrary];
     // 读取着色器程序
-    id <MTLFunction> vertexFunction = [library newFunctionWithName:@"vertexShader"];
-    id <MTLFunction> fragmentFunction = [library newFunctionWithName:@"fragmentShader"];
+    id <MTLFunction> vertexFunction = [library newFunctionWithName:@"defaultVertexShader"];
+    id <MTLFunction> fragmentFunction = [library newFunctionWithName:@"defaultFragmentShader"];
     
     // 渲染管线描述
     MTLRenderPipelineDescriptor *descriptor = [[MTLRenderPipelineDescriptor alloc] init];
@@ -93,16 +98,57 @@
                                                   error:NULL];
 }
 
-// 初始化滤镜
-- (void)setupFilter {
-    self.filter = [[Filter alloc] init];
+// 初始化帽子滤镜
+- (void)setupHatFilter {
+    self.hatFilter = [[Filter alloc] init];
+    GLKMatrix4 matrix = GLKMatrix4Identity;
+    matrix = GLKMatrix4Translate(matrix, 0.1, -0.2, 0);
+    matrix = GLKMatrix4Scale(matrix, 0.6, 0.6, 1);
+    
+    self.hatFilter.matrix = [self matrixWithGLKMatrix:matrix];
+    self.hatFilter.overlayImage = [UIImage imageNamed:@"hat.png"];
+}
+
+// 初始化眼镜滤镜
+- (void)setupGlassesFilter {
+    self.glassesFilter = [[Filter alloc] init];
+    GLKMatrix4 matrix = GLKMatrix4Identity;
+    matrix = GLKMatrix4RotateZ(matrix, -0.32);
+    matrix = GLKMatrix4Translate(matrix, 0.08, 0.2, 0);
+    matrix = GLKMatrix4Scale(matrix, 0.5, 0.5, 1);
+    
+    self.glassesFilter.matrix = [self matrixWithGLKMatrix:matrix];
+    self.glassesFilter.overlayImage = [UIImage imageNamed:@"glasses.png"];
+}
+
+//  初始化口罩滤镜
+- (void)setupMaskFilter {
+    self.maskFilter = [[Filter alloc] init];
+    GLKMatrix4 matrix = GLKMatrix4Identity;
+    matrix = GLKMatrix4RotateZ(matrix, -0.32);
+    matrix = GLKMatrix4Translate(matrix, 0.1, 0.35, 0);
+    matrix = GLKMatrix4Scale(matrix, 0.5, 0.5, 1);
+    
+    self.maskFilter.matrix = [self matrixWithGLKMatrix:matrix];
+    self.maskFilter.overlayImage = [UIImage imageNamed:@"mask.png"];
+}
+
+// 矩阵转换
+- (matrix_float4x4)matrixWithGLKMatrix:(GLKMatrix4)matrix {
+    matrix_float4x4 ret = (matrix_float4x4){
+        simd_make_float4(matrix.m00, matrix.m01, matrix.m02, matrix.m03),
+        simd_make_float4(matrix.m10, matrix.m11, matrix.m12, matrix.m13),
+        simd_make_float4(matrix.m20, matrix.m21, matrix.m22, matrix.m23),
+        simd_make_float4(matrix.m30, matrix.m31, matrix.m32, matrix.m33),
+    };
+    return ret;
 }
 
 #pragma mark - MTKViewDelegate
 
 - (void)drawInMTKView:(MTKView *)view {
     // 添加滤镜
-    id <MTLTexture> resultTexture = [self.filter applyEffectWithTexture:self.texture];
+    id <MTLTexture> resultTexture = [self.maskFilter applyEffectWithTexture:self.texture];
     
     id <MTLCommandBuffer> commandBuffer = [self.commandQueue commandBuffer];
     MTLRenderPassDescriptor *renderPassDescriptor = self.mtkView.currentRenderPassDescriptor;
