@@ -42,7 +42,6 @@
     Constants constants;
     constants.matrix = matrix_invert(self.matrix);
     
-    [self setupOverlayTexture];
     [self setupTargetTextureWithSize:CGSizeMake(texture.width, texture.height)];
     
     id <MTLCommandBuffer> commandBuffer = [self.commandQueue commandBuffer];
@@ -69,6 +68,12 @@
     [commandBuffer commit];
     
     return self.targetTexture;
+}
+
+#pragma mark - Accessor
+- (void)setOverlayImage:(UIImage *)overlayImage{
+    _overlayImage = overlayImage;
+    [self setupOverlayTexture];
 }
 
 #pragma mark - Private
