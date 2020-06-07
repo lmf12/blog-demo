@@ -20,17 +20,11 @@
 @property (nonatomic, strong) id <MTLTexture> overlayTexture;
 @property (nonatomic, assign) Constants constans;
 
-@property (nonatomic, assign) CVPixelBufferRef renderTarget;
+@property (nonatomic, strong) MTLTextureDescriptor *textureDescriptor;
 
 @end
 
 @implementation Filter
-
-- (void)dealloc {
-    if (_renderTarget) {
-        CVPixelBufferRelease(_renderTarget);
-    }
-}
 
 - (instancetype)init {
     self = [super init];
@@ -73,6 +67,7 @@
     
     [renderEncoder endEncoding];
     [commandBuffer commit];
+    [commandBuffer waitUntilCompleted];
     
     return self.targetTexture;
 }
@@ -82,6 +77,16 @@
     _overlayImage = overlayImage;
     [self setupOverlayTexture];
 }
+
+- (MTLTextureDescriptor *)textureDescriptor {
+    if (!_textureDescriptor) {
+        _textureDescriptor = [[MTLTextureDescriptor alloc] init];
+        _textureDescriptor.pixelFormat = MTLPixelFormatBGRA8Unorm;
+        _textureDescriptor.usage = MTLTextureUsageShaderRead | MTLTextureUsageShaderWrite | MTLTextureUsageRenderTarget;
+    }
+    return _textureDescriptor;
+}
+
 
 #pragma mark - Private
 
@@ -149,65 +154,9 @@
 
 /// 初始化目标纹理
 - (void)setupTargetTextureWithSize:(CGSize)size {
-    CVMetalTextureCacheRef textureCache;
-    CVReturn status = CVMetalTextureCacheCreate(kCFAllocatorDefault,
-                                                nil,
-                                                self.device,
-                                                nil,
-                                                &textureCache);
-    if (status != kCVReturnSuccess) {
-        NSLog(@"texture cache create fail");
-        return;
-    }
-    
-    CFDictionaryRef dictionary;
-    CFMutableDictionaryRef attrs;
-    dictionary = CFDictionaryCreate(kCFAllocatorDefault,
-                                    nil,
-                                    nil,
-                                    0,
-                                    &kCFTypeDictionaryKeyCallBacks,
-                                    &kCFTypeDictionaryValueCallBacks);
-    attrs = CFDictionaryCreateMutable(kCFAllocatorDefault,
-                                      1,
-                                      &kCFTypeDictionaryKeyCallBacks,
-                                      &kCFTypeDictionaryValueCallBacks);
-    
-    CFDictionarySetValue(attrs,
-                         kCVPixelBufferIOSurfacePropertiesKey,
-                         dictionary);
-    
-    if (!self.renderTarget) {
-        CVPixelBufferCreate(kCFAllocatorDefault, size.width, size.height,
-                            kCVPixelFormatType_32BGRA,
-                            attrs,
-                            &_renderTarget);
-    }
-    
-    size_t width = CVPixelBufferGetWidthOfPlane(self.renderTarget, 0);
-    size_t height = CVPixelBufferGetHeightOfPlane(self.renderTarget, 0);
-    MTLPixelFormat pixelFormat = MTLPixelFormatBGRA8Unorm;
-    
-    CVMetalTextureRef texture = nil;
-    status = CVMetalTextureCacheCreateTextureFromImage(kCFAllocatorDefault,
-                                                       textureCache,
-                                                       self.renderTarget,
-                                                       nil,
-                                                       pixelFormat,
-                                                       width,
-                                                       height,
-                                                       0,
-                                                       &texture);
-    if(status == kCVReturnSuccess) {
-        self.targetTexture = CVMetalTextureGetTexture(texture);
-        CFRelease(texture);
-    } else {
-        NSLog(@"render target create fail");
-    }
-    
-    CFRelease(textureCache);
-    CFRelease(attrs);
-    CFRelease(dictionary);
+    self.textureDescriptor.width = size.width;
+    self.textureDescriptor.height = size.height;
+    self.targetTexture = [self.device newTextureWithDescriptor:self.textureDescriptor];
 }
 
 @end
