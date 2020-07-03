@@ -19,3 +19,5 @@
 
 * 带光照的立方体渲染【[预览](https://github.com/lmf12/blog-demo/blob/master/testOpenGLESCube/preview.gif)】：[源码地址](https://github.com/lmf12/blog-demo/tree/master/testOpenGLESCube)
 * iOS13 下开启多个摄像头【[预览](https://github.com/lmf12/blog-demo/blob/master/testMultiCamera/preview.gif)】：[源码地址](https://github.com/lmf12/blog-demo/tree/master/testMultiCamera)
+* Metal 纹理渲染：[源码地址](https://github.com/lmf12/blog-demo/tree/master/testMetalRender)
+* Metal 简单滤镜链：[源码地址](https://github.com/lmf12/blog-demo/tree/master/testMetalFilterChain)
