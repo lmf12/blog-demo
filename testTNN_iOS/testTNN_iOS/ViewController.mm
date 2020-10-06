@@ -24,6 +24,8 @@ using namespace TNN_NS;
 @property (nonatomic, strong) UIImage *resultImage;
 @property (nonatomic, strong) UIImageView *resultImageView;
 
+@property (nonatomic, strong) id<MTLLibrary> library;
+
 @end
 
 @implementation ViewController
@@ -46,6 +48,17 @@ using namespace TNN_NS;
     [self updateUI];
 }
 
+/// 释放网络
+- (void)releaseNetwork {
+    if (_network) {
+        delete _network;
+        _network = nullptr;
+    }
+    _networkInstance = nullptr;
+}
+
+#pragma mark - UI
+
 /// 初始化UI
 - (void)setupUI {
     int randomNum = arc4random() % 5 + 1;
@@ -65,6 +78,8 @@ using namespace TNN_NS;
 - (void)updateUI {
     self.resultImageView.image = self.resultImage;
 }
+
+#pragma mark - TNN
 
 /// 初始化 TNN 流程
 - (void)setupTNN {
@@ -111,9 +126,14 @@ using namespace TNN_NS;
 
 /// 构建网络
 - (void)bulidNetwork {
-    // 获取 metallib 路径
+    // 获取默认 metallib 路径
     NSString *bundlePath = [[NSBundle mainBundle] pathForResource:@"tnn" ofType:@"bundle"];
     NSString *libPath = [bundlePath stringByAppendingPathComponent:@"tnn.metallib"];
+    
+    // 读取自定义 metallib
+    NSString *customLibPath = [[NSBundle mainBundle] pathForResource:@"test" ofType:@"metallib"];
+    self.library = [MTLCreateSystemDefaultDevice() newLibraryWithFile:customLibPath
+                                                                error:NULL];
     
     // 创建网络实例
     Status status;
@@ -153,6 +173,16 @@ using namespace TNN_NS;
     };
     id<MTLTexture> texture = [textureLoader newTextureWithCGImage:image.CGImage options:options error:NULL];
     
+    /// 以下的步骤二选一，效果一致
+    // 默认
+//    [self defaultPreprocessWithInput:networkInput texture:texture];
+    // 自定义
+    [self customPreprocessWithInput:networkInput texture:texture];
+}
+
+/// 默认预处理
+- (void)defaultPreprocessWithInput:(Blob *)networkInput
+                           texture:(id<MTLTexture>)texture {
     Mat inputMat = {DEVICE_METAL, tnn::N8UC4, (__bridge void*)texture};
     shared_ptr<BlobConverter> preprocessor = make_shared<BlobConverter>(networkInput);
     
@@ -162,6 +192,32 @@ using namespace TNN_NS;
     input_cvt_param.bias  = {-1.0, -1.0, -1.0, 0};
     input_cvt_param.reverse_channel = true;
     preprocessor->ConvertFromMat(inputMat, input_cvt_param, (__bridge void*)commandQueue);
+}
+
+/// 自定义预处理
+- (void)customPreprocessWithInput:(Blob *)networkInput
+                          texture:(id<MTLTexture>)texture {
+    id<MTLCommandQueue> commandQueue = [self fetchCommandQueue];
+    id<MTLCommandBuffer> commandBuffer = [commandQueue commandBuffer];
+    [commandBuffer enqueue];
+    
+    id<MTLBuffer> blobBuffer = (__bridge id<MTLBuffer>)(void *)networkInput->GetHandle().base;
+    NSUInteger blobOffset = (NSUInteger)networkInput->GetHandle().bytes_offset;
+    
+    MTLSize groupThreads = {(NSUInteger)32, (NSUInteger)1, (NSUInteger)1};
+    MTLSize groups = {((texture.width + 31)/32), texture.height, 1};
+    id<MTLComputeCommandEncoder> encoder = [commandBuffer computeCommandEncoder];
+    
+    id<MTLComputePipelineState> pipelineState = [self computePipelineStateWithLibrary:self.library functionName:@"test_preprocess"];
+    [encoder setComputePipelineState:pipelineState];
+    [encoder setTexture:texture atIndex:0];
+    
+    [encoder setBuffer:blobBuffer offset:blobOffset atIndex:0];
+    [encoder dispatchThreadgroups:groups threadsPerThreadgroup:groupThreads];
+    [encoder endEncoding];
+    
+    [commandBuffer commit];
+    [commandBuffer waitUntilScheduled];
 }
 
 /// 执行网络
@@ -197,7 +253,20 @@ using namespace TNN_NS;
     textureDescriptor.height = height;
     id<MTLTexture> resultTexture = [MTLCreateSystemDefaultDevice() newTextureWithDescriptor:textureDescriptor];
     
-    Mat outputMat = {DEVICE_METAL, tnn::N8UC4, (__bridge void*)resultTexture};
+    /// 以下的步骤二选一，效果一致
+    // 默认
+//    [self defaultPostprocessWithOutput:networkOutput texture:resultTexture];
+    // 自定义
+    [self customPostprocessWithOutput:networkOutput texture:resultTexture];
+    
+    // 将结果保存
+    self.resultImage = [self imageWithMTLTexture:resultTexture];
+}
+
+/// 默认后处理
+- (void)defaultPostprocessWithOutput:(Blob *)networkOutput
+                             texture:(id<MTLTexture>)texture {
+    Mat outputMat = {DEVICE_METAL, tnn::N8UC4, (__bridge void*)texture};
     shared_ptr<BlobConverter> postprocessor = make_shared<BlobConverter>(networkOutput);
     
     id<MTLCommandQueue> commandQueue = [self fetchCommandQueue];
@@ -206,10 +275,35 @@ using namespace TNN_NS;
     output_cvt_param.bias  = {255 / 2.0, 255 / 2.0, 255 / 2.0, 255};
     output_cvt_param.reverse_channel = true;
     postprocessor->ConvertToMatAsync(outputMat, output_cvt_param, (__bridge void*)commandQueue);
-    
-    // 将结果保存
-    self.resultImage = [self imageWithMTLTexture:resultTexture];
 }
+
+/// 自定义后处理
+- (void)customPostprocessWithOutput:(Blob *)networkOutput
+                            texture:(id<MTLTexture>)texture {
+    id<MTLCommandQueue> commandQueue = [self fetchCommandQueue];
+    id<MTLCommandBuffer> commandBuffer = [commandQueue commandBuffer];
+    [commandBuffer enqueue];
+    
+    id<MTLBuffer> blobBuffer = (__bridge id<MTLBuffer>)(void *)networkOutput->GetHandle().base;
+    NSUInteger blobOffset = (NSUInteger)networkOutput->GetHandle().bytes_offset;
+        
+    MTLSize groupThreads = {(NSUInteger)32, (NSUInteger)1, (NSUInteger)1};
+    MTLSize groups = {((texture.width + 31)/32), texture.height, 1};
+    id<MTLComputeCommandEncoder> encoder = [commandBuffer computeCommandEncoder];
+    
+    id<MTLComputePipelineState> pipelineState = [self computePipelineStateWithLibrary:self.library functionName:@"test_postprocess"];
+    [encoder setComputePipelineState:pipelineState];
+    [encoder setTexture:texture atIndex:0];
+    [encoder setBuffer:blobBuffer offset:blobOffset atIndex:0];
+    
+    [encoder dispatchThreadgroups:groups threadsPerThreadgroup:groupThreads];
+    [encoder endEncoding];
+    
+    [commandBuffer commit];
+    [commandBuffer waitUntilScheduled];
+}
+
+#pragma mark - Utils
 
 /// 获取网络实例中的 CommandQueue
 - (id<MTLCommandQueue>)fetchCommandQueue {
@@ -242,13 +336,10 @@ using namespace TNN_NS;
     return uiimage;
 }
 
-/// 释放网络
-- (void)releaseNetwork {
-    if (_network) {
-        delete _network;
-        _network = nullptr;
-    }
-    _networkInstance = nullptr;
+/// 根据 library 和 functionName 获取 pipelineState
+- (id<MTLComputePipelineState>)computePipelineStateWithLibrary:(id<MTLLibrary>)library functionName:(NSString *)functionName {
+    id <MTLFunction> function = [library newFunctionWithName:functionName];
+    return function ? [library.device newComputePipelineStateWithFunction:function error:nil] : nil;
 }
 
 @end

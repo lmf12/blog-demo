@@ -16,6 +16,8 @@
 		E853BD3B252C511700FD2324 /* image1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E853BD36252C511700FD2324 /* image1.jpg */; };
 		E853BD3C252C511700FD2324 /* image2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E853BD37252C511700FD2324 /* image2.jpg */; };
 		E853BD3D252C511700FD2324 /* image4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E853BD38252C511700FD2324 /* image4.jpg */; };
+		E853BD8F252C7EFE00FD2324 /* test.metallib in Resources */ = {isa = PBXBuildFile; fileRef = E853BD8E252C7EFE00FD2324 /* test.metallib */; };
+		E853BDFB252C8F1300FD2324 /* test.metal in Sources */ = {isa = PBXBuildFile; fileRef = E853BDFA252C8F1300FD2324 /* test.metal */; };
 		E8B29ADC2529B1DD00759070 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E8B29ADB2529B1DD00759070 /* AppDelegate.m */; };
 		E8B29ADF2529B1DD00759070 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E8B29ADE2529B1DD00759070 /* SceneDelegate.m */; };
 		E8B29AE22529B1DD00759070 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E8B29AE12529B1DD00759070 /* ViewController.mm */; };
@@ -40,6 +42,8 @@
 		E853BD36252C511700FD2324 /* image1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image1.jpg; sourceTree = "<group>"; };
 		E853BD37252C511700FD2324 /* image2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image2.jpg; sourceTree = "<group>"; };
 		E853BD38252C511700FD2324 /* image4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image4.jpg; sourceTree = "<group>"; };
+		E853BD8E252C7EFE00FD2324 /* test.metallib */ = {isa = PBXFileReference; lastKnownFileType = "archive.metal-library"; path = test.metallib; sourceTree = "<group>"; };
+		E853BDFA252C8F1300FD2324 /* test.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = test.metal; sourceTree = "<group>"; };
 		E8B29AD72529B1DD00759070 /* testTNN_iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = testTNN_iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8B29ADA2529B1DD00759070 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		E8B29ADB2529B1DD00759070 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -124,6 +128,8 @@
 			children = (
 				E8167C81252BED3100FEF9E4 /* image */,
 				E8167C7A252AEA3D00FEF9E4 /* model */,
+				E853BDFA252C8F1300FD2324 /* test.metal */,
+				E853BD8E252C7EFE00FD2324 /* test.metallib */,
 				E8B29B182529F90500759070 /* tnn.bundle */,
 				E8B29B192529F90500759070 /* tnn.framework */,
 				E8B29ADA2529B1DD00759070 /* AppDelegate.h */,
@@ -218,6 +224,7 @@
 				E8B29B1A2529F90500759070 /* tnn.bundle in Resources */,
 				E853BD3C252C511700FD2324 /* image2.jpg in Resources */,
 				E853BD39252C511700FD2324 /* image3.jpg in Resources */,
+				E853BD8F252C7EFE00FD2324 /* test.metallib in Resources */,
 				E8B29AE52529B1DD00759070 /* Main.storyboard in Resources */,
 				E853BD3B252C511700FD2324 /* image1.jpg in Resources */,
 			);
@@ -235,6 +242,7 @@
 				E8B29AED2529B1DE00759070 /* main.m in Sources */,
 				E8B29ADF2529B1DD00759070 /* SceneDelegate.m in Sources */,
 				E853BD22252BF4C100FD2324 /* UIImage+Resize.m in Sources */,
+				E853BDFB252C8F1300FD2324 /* test.metal in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
