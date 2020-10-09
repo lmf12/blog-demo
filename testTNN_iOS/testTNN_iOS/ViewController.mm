@@ -191,7 +191,7 @@ using namespace TNN_NS;
     input_cvt_param.scale = {2.0 / 255, 2.0 / 255, 2.0 / 255, 0};
     input_cvt_param.bias  = {-1.0, -1.0, -1.0, 0};
     input_cvt_param.reverse_channel = true;
-    preprocessor->ConvertFromMat(inputMat, input_cvt_param, (__bridge void*)commandQueue);
+    preprocessor->ConvertFromMatAsync(inputMat, input_cvt_param, (__bridge void*)commandQueue);
 }
 
 /// 自定义预处理
