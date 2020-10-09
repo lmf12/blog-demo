@@ -204,15 +204,17 @@ using namespace TNN_NS;
     id<MTLBuffer> blobBuffer = (__bridge id<MTLBuffer>)(void *)networkInput->GetHandle().base;
     NSUInteger blobOffset = (NSUInteger)networkInput->GetHandle().bytes_offset;
     
-    MTLSize groupThreads = {(NSUInteger)32, (NSUInteger)1, (NSUInteger)1};
-    MTLSize groups = {((texture.width + 31)/32), texture.height, 1};
     id<MTLComputeCommandEncoder> encoder = [commandBuffer computeCommandEncoder];
     
     id<MTLComputePipelineState> pipelineState = [self computePipelineStateWithLibrary:self.library functionName:@"test_preprocess"];
     [encoder setComputePipelineState:pipelineState];
     [encoder setTexture:texture atIndex:0];
-    
     [encoder setBuffer:blobBuffer offset:blobOffset atIndex:0];
+    
+    NSUInteger width = pipelineState.threadExecutionWidth;
+    NSUInteger height = pipelineState.maxTotalThreadsPerThreadgroup / width;
+    MTLSize groupThreads = {width, height, (NSUInteger)1};
+    MTLSize groups = {((texture.width + width - 1) / width), ((texture.height + height - 1) / height), 1};
     [encoder dispatchThreadgroups:groups threadsPerThreadgroup:groupThreads];
     [encoder endEncoding];
     
@@ -287,8 +289,6 @@ using namespace TNN_NS;
     id<MTLBuffer> blobBuffer = (__bridge id<MTLBuffer>)(void *)networkOutput->GetHandle().base;
     NSUInteger blobOffset = (NSUInteger)networkOutput->GetHandle().bytes_offset;
         
-    MTLSize groupThreads = {(NSUInteger)32, (NSUInteger)1, (NSUInteger)1};
-    MTLSize groups = {((texture.width + 31)/32), texture.height, 1};
     id<MTLComputeCommandEncoder> encoder = [commandBuffer computeCommandEncoder];
     
     id<MTLComputePipelineState> pipelineState = [self computePipelineStateWithLibrary:self.library functionName:@"test_postprocess"];
@@ -296,6 +296,10 @@ using namespace TNN_NS;
     [encoder setTexture:texture atIndex:0];
     [encoder setBuffer:blobBuffer offset:blobOffset atIndex:0];
     
+    NSUInteger width = pipelineState.threadExecutionWidth;
+    NSUInteger height = pipelineState.maxTotalThreadsPerThreadgroup / width;
+    MTLSize groupThreads = {width, height, (NSUInteger)1};
+    MTLSize groups = {((texture.width + width - 1) / width), ((texture.height + height - 1) / height), 1};
     [encoder dispatchThreadgroups:groups threadsPerThreadgroup:groupThreads];
     [encoder endEncoding];
     
