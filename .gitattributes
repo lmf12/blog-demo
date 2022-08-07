@@ -1,0 +1,6 @@
+*.png filter=lfs diff=lfs merge=lfs -text
+*.gif filter=lfs diff=lfs merge=lfs -text
+*.jpg filter=lfs diff=lfs merge=lfs -text
+testTNN_iOS/testTNN_iOS/tnn.bundle/** filter=lfs diff=lfs merge=lfs -text
+testTNN_iOS/testTNN_iOS/tnn.framework/** filter=lfs diff=lfs merge=lfs -text
+testTNN_iOS/testTNN_iOS/model/** filter=lfs diff=lfs merge=lfs -text

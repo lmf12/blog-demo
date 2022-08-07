@@ -61,7 +61,3 @@ fastlane/test_output
 # https://github.com/johnno1962/injectionforxcode
 
 iOSInjectionProject/
-
-testTNN_iOS/testTNN_iOS/tnn.bundle
-testTNN_iOS/testTNN_iOS/tnn.framework
-testTNN_iOS/testTNN_iOS/model
