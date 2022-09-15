@@ -2,7 +2,7 @@
 
 **已将编译好的 SDK 和模型文件随工程上传。**
 
-1.将本仓库 `clone` 到本地，执行 `git lfs pull`。
+1.将本仓库 `clone` 到本地 ~~，执行 `git lfs pull`~~ 。
 
 ~~2.根据 [TNN iOS 编译教程](https://github.com/Tencent/TNN/blob/master/doc/cn/user/compile.md) ，编译出 **tnn.framework**、**tnn.bundle**，将它们放到 `blog-demo/testTNN_iOS/testTNN_iOS/` 路径下。~~
 
